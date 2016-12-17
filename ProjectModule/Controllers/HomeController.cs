@@ -10,7 +10,7 @@ namespace ProjectModule.Controllers
     public class HomeController : Controller
     {
         public ActionResult Index()
-        {
+        {         
             using (var db = new ProjectModuleDBEntities())
             {
                 var tasks = db.Tasks.ToList();
