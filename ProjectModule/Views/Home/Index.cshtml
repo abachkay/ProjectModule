@@ -1,0 +1,19 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<textarea> abc</textarea>
+<div class="section center">
+    <button class="btn-floating light-blue waves-effect waves-light"><i class="material-icons">done</i></button>
+</div>
+<div class="section">
+    @foreach (var t in ViewBag.Tasks)
+    {
+        <div class="card-panel light-blue lighten-4">
+            <div class="center">Завдання:</div>
+            @t.Description
+            <div class="center">Очікуваний результат:</div>
+            @t.Answer
+        </div>
+    }
+</div>
