@@ -1,29 +1,99 @@
 ﻿@{
     ViewBag.Title = "Home Page";
 }
-
-        <div class="col-md-5 task">
-
-                <textarea name="" id="" cols="30" rows="10" placeholder="Task text"></textarea>
-               
-            </div>
-            <div class="col-md-5 expect">
-            
-                <textarea name="" id="e_sex" cols="30" rows="10" placeholder="Actual result"></textarea>
-            </div>
-
-
-@*<div class="section center">
-    <button class="btn-floating light-blue waves-effect waves-light"><i class="material-icons">done</i></button>
+<div id="mySidenav" class="sidenav">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+    <h1>All tasks:</h1>
+    <a href="#">Task 1</a>
+    <a href="#">Task 2</a>
+    <a href="#">Task 3</a>
+    <a href="#">Task 4</a>
+    <a href="#">Task 5</a>
+    <a href="#">Task 6</a>
+    <a href="#">Task 7</a>
+    <a href="#">Task 8</a>
 </div>
-<div class="section">
-    @foreach (var t in ViewBag.Tasks)
-    {
-        <div class="card-panel light-blue lighten-4">
-            <div class="center">Завдання:</div>
-            @t.Description
-            <div class="center">Очікуваний результат:</div>
-            @t.Answer
+
+        <div class="row task">
+            
+            <div class="col-md-1">
+                <span style="font-size:20px;cursor:pointer" onclick="openNav()">&#9776; Tasks</span>
+                  
+            </div>
+
+            <div class="col-md-2">
+                <p>
+                    <strong>Instructions</strong><br>
+                    On line 14, create an sized heading called 'List of things I find just OK'.
+                    Starting on line 15, create an ordered list using the tag.
+                    Your ordered list should have three items, each wrapped (i.e. surrounded) by tags.
+                </p>
+            </div>  
+
+            <div class="col-md-5">
+                <!---- <textarea name="" id="e_sex" cols="30" rows="10" placeholder="Write code here..."></textarea> -->
+                <div id="tab" class="container">
+                    <ul class="nav nav-pills">
+                        <li class="active">
+                            <a href="#html" data-toggle="tab">index.html</a>
+                        </li>
+                        <li>
+                            <a href="#css" data-toggle="tab">style.css</a>
+                        </li>
+                    </ul>
+
+                    <div class="tab-content clearfix">
+                        <div class="tab-pane active" id="html">
+                            <textarea id="code" cols="30" rows="10" placeholder="Actual html"></textarea>
+                        </div>
+                        <div class="tab-pane" id="css">
+                            <textarea id="css" cols="30" rows="10" placeholder="Actual css"></textarea>
+                        </div>
+                    </div>
+                </div>
+           </div>
+
+           <div class="col-md-4">
+               <div id="tab" class="container">
+                   <ul class="nav nav-pills">
+                       <li class="active">
+                           <a href="#actual" data-toggle="tab">Actual result</a>
+                       </li>
+                       <li>
+                           <a href="#expect" data-toggle="tab">Expected result</a>
+                       </li>
+                   </ul>
+
+                   <div class="tab-content clearfix">
+                       <div class="tab-pane active" id="actual">
+                           <div id="actual">Actual result</div>
+                       </div>
+                       <div class="tab-pane" id="expect">
+                           <div id="expect">Expected result</div>
+                       </div>
+                   </div>
+               </div>
+          </div>            
         </div>
+
+        <div class="container-fluid">
+            <div class="row text-center ma">
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-primary btn-lg">Submit</button>
+                        <button type="button" class="btn btn-warning btn-lg">Reset</button>
+                    </div> 
+         
+             </div>
+        </div>
+        
+         
+<script>
+    function openNav() {
+        document.getElementById("mySidenav").style.width = "250px";
     }
-</div>*@
+
+    function closeNav() {
+        document.getElementById("mySidenav").style.width = "0";
+    }
+</script>
+       
