@@ -1,9 +1,10 @@
-body {
+body, html {
 	margin: 0;
 	padding: 0;
 	height: 100%;
 	width: 100%;
-	background: linear-gradient(45deg, #D74177   , #FFE98A);
+	// background-color: #D74177;
+	background: linear-gradient(45deg, #D74177   , #FFE98A) no-repeat;
 }
 
 
@@ -40,6 +41,10 @@ body {
 		.light();
 	}
 	margin-top: 50px;
+	li a{
+		border-radius: 0;
+		.light();
+	}
 	p {
 		font-size: 20px;
 		.light();
@@ -47,13 +52,20 @@ body {
 	
 		textarea {
 			width: 550px;
-			height: 300px;
+			height: 500px;
 			resize: none;
+			.light();
+			font-size: 18px;
 		}
-	
+	div#actual,div#expect{
+		.light();
+		font-size: 20px;
+	}
 }
 .ma {
+	margin-left: -90px;
 	.btn-lg {
+		margin-right: 10px; 
 		width: 250px;
 		border-radius: 0;
 		.light();
