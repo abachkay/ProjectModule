@@ -14,8 +14,18 @@ namespace ProjectModule
     
     public partial class Tasks
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Tasks()
+        {
+            this.Conditions = new HashSet<Conditions>();
+        }
+    
         public long Id { get; set; }
         public string Description { get; set; }
-        public string Answer { get; set; }
+        public string HTML { get; set; }
+        public string CSS { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Conditions> Conditions { get; set; }
     }
 }
