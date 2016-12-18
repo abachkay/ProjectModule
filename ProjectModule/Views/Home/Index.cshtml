@@ -1,45 +1,66 @@
 ﻿@{
     ViewBag.Title = "Home Page";
 }
-
+<div id="mySidenav" class="sidenav">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+    <h1>All tasks:</h1>
+    <a href="#">Task 1</a>
+    <a href="#">Task 2</a>
+    <a href="#">Task 3</a>
+    <a href="#">Task 4</a>
+    <a href="#">Task 5</a>
+    <a href="#">Task 6</a>
+    <a href="#">Task 7</a>
+    <a href="#">Task 8</a>
+</div>
 
         <div class="row task">
-            <div class="col-md-2 text-center">
-                <nav>
-                <ul class="list-group">
-                        <li><a href="#">Task 1</a></li>
-                        <li><a href="#">Task 2</a></li>
-                        <li><a href="#">Task 3</a></li>
-                        <li><a href="http://www.google.com" target="_blank">Task 4</a></li>
-                        <li><a href="#">Task 5</a></li>
-                        <li><a href="#">Task 6</a></li>
-                         <li><a href="#">Task 7</a></li>
-                          <li><a href="#">Task 8</a></li>
-                           <li><a href="#">Task 9</a></li>
-                    </ul>
-                </nav>    
+            
+            <div class="col-md-1">
+                <span style="font-size:20px;cursor:pointer" onclick="openNav()">&#9776; Tasks</span>
+                  
             </div>
-            <div class="col-md-5">
-                <p><strong>Instructions</strong><br>
+
+            <div class="col-md-2">
+                <p>
+                    <strong>Instructions</strong><br>
                     On line 14, create an sized heading called 'List of things I find just OK'.
-Starting on line 15, create an ordered list using the tag.
-Your ordered list should have three items, each wrapped (i.e. surrounded) by tags.
+                    Starting on line 15, create an ordered list using the tag.
+                    Your ordered list should have three items, each wrapped (i.e. surrounded) by tags.
                 </p>
+            </div>  
 
-                 <textarea name="" id="e_sex" cols="30" rows="10" placeholder="Actual result"></textarea>
-            </div>
             <div class="col-md-5">
-                
-               <p>Task text</p>
+                <!---- <textarea name="" id="e_sex" cols="30" rows="10" placeholder="Write code here..."></textarea> -->
+                <div id="tab" class="container">
+                    <ul class="nav nav-pills">
+                        <li class="active">
+                            <a href="#html" data-toggle="tab">index.html</a>
+                        </li>
+                        <li>
+                            <a href="#css" data-toggle="tab">style.css</a>
+                        </li>
+                    </ul>
 
-                 <textarea name="" id="e_sex" cols="30" rows="10" placeholder="Actual result"></textarea>
+                    <div class="tab-content clearfix">
+                        <div class="tab-pane active" id="html">
+                            <textarea id="code" cols="30" rows="10" placeholder="Actual html"></textarea>
+                        </div>
+                        <div class="tab-pane" id="css">
+                            <textarea id="css" cols="30" rows="10" placeholder="Actual css"></textarea>
+                        </div>
+                    </div>
+                </div>
+           </div>
 
-             </div>
-        </div>  
+           <div class="col-md-4">
+                <p>Expected result</p>
+                <div>Actual result</div>
+          </div>            
+        </div>
 
         <div class="container">
             <div class="row text-center ma">
-              
                     <div class="btn-group">
                         <button type="button" class="btn btn-primary btn-lg">Submit</button>
                         <button type="button" class="btn btn-warning btn-lg">Reset</button>
@@ -49,5 +70,13 @@ Your ordered list should have three items, each wrapped (i.e. surrounded) by tag
         </div>
         
          
+<script>
+    function openNav() {
+        document.getElementById("mySidenav").style.width = "250px";
+    }
 
+    function closeNav() {
+        document.getElementById("mySidenav").style.width = "0";
+    }
+</script>
        
