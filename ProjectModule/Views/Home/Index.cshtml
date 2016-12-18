@@ -1,45 +1,50 @@
 ﻿@{
     ViewBag.Title = "Home Page";
 }
-    <div class="container">
+
+
         <div class="row task">
-            <div class="col-md-6 ">
-
-                <textarea name="" id="" cols="30" rows="10" placeholder="Task text"></textarea>
-                   
+            <div class="col-md-2 text-center">
+                <nav>
+                <ul class="list-group">
+                        <li><a href="#">Task 1</a></li>
+                        <li><a href="#">Task 2</a></li>
+                        <li><a href="#">Task 3</a></li>
+                        <li><a href="http://www.google.com" target="_blank">Task 4</a></li>
+                        <li><a href="#">Task 5</a></li>
+                        <li><a href="#">Task 6</a></li>
+                         <li><a href="#">Task 7</a></li>
+                          <li><a href="#">Task 8</a></li>
+                           <li><a href="#">Task 9</a></li>
+                    </ul>
+                </nav>    
             </div>
-            <div class="col-md-6">
+            <div class="col-md-5">
+                <p><strong>Instructions</strong><br>
+                    On line 14, create an sized heading called 'List of things I find just OK'.
+Starting on line 15, create an ordered list using the tag.
+Your ordered list should have three items, each wrapped (i.e. surrounded) by tags.
+                </p>
+
+                 <textarea name="" id="e_sex" cols="30" rows="10" placeholder="Actual result"></textarea>
+            </div>
+            <div class="col-md-5">
                 
-                <textarea name="" id="e_sex" cols="30" rows="10" placeholder="Actual result"></textarea>
+               <p>Task text</p>
+
+                 <textarea name="" id="e_sex" cols="30" rows="10" placeholder="Actual result"></textarea>
 
              </div>
-        </div>    
-         <div class="expect row">
-            <div class="col-md-6">
+        </div>  
 
-                <textarea name="" id="" cols="30" rows="10" placeholder="Task text"></textarea>
-                   
+        <div class="container">
+            <div class=" row text-center ma">
+                <class="col-md-offset-3 col-md-3">
+                    <button class="btn btn-primary btn-lg">Submit</button>
+                    <button class="btn btn-warning btn-lg">Reset</button>
+                </div>
             </div>
-            <div class="col-md-6">
-                
-                <textarea name="" id="e_sex" cols="30" rows="10" placeholder="Actual result"></textarea>
+        </div>  
+         
 
-             </div>
-        </div>    
-    </div>
-
-
-@*<div class="section center">
-    <button class="btn-floating light-blue waves-effect waves-light"><i class="material-icons">done</i></button>
-</div>
-<div class="section">
-    @foreach (var t in ViewBag.Tasks)
-    {
-        <div class="card-panel light-blue lighten-4">
-            <div class="center">Завдання:</div>
-            @t.Description
-            <div class="center">Очікуваний результат:</div>
-            @t.Answer
-        </div>
-    }
-</div>*@
+       

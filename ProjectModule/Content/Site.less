@@ -1,18 +1,49 @@
 body {
 	margin: 0;
 	padding: 0;
-
+	height: 100%;
+	width: 100%;
+	background: linear-gradient(45deg, #D74177   , #FFE98A);
 }
 
-nav {
-	position: fixed;
-    background: linear-gradient(45deg, #312A6C, #852D91);
-	ul.list-inline {
-		margin-bottom: 0;
 
+@font-face {
+    font-family: 'OpenSansLight';
+    src: url('fonts/OpenSansLight.eot');
+    src: url('fonts/OpenSansLight.eot') format('embedded-opentype'),
+         url('fonts/OpenSansLight.woff2') format('woff2'),
+         url('fonts/OpenSansLight.woff') format('woff'),
+         url('fonts/OpenSansLight.ttf') format('truetype'),
+         url('fonts/OpenSansLight.svg#OpenSansLight') format('svg');
+}
+
+@font-face {
+    font-family: 'OpenSansSemibold';
+    src: url('fonts/OpenSansSemibold.eot');
+    src: url('fonts/OpenSansSemibold.eot') format('embedded-opentype'),
+         url('fonts/OpenSansSemibold.woff2') format('woff2'),
+         url('fonts/OpenSansSemibold.woff') format('woff'),
+         url('fonts/OpenSansSemibold.ttf') format('truetype'),
+         url('fonts/OpenSansSemibold.svg#OpenSansSemibold') format('svg');
+}
+
+.bold {
+	  font-family: 'OpenSansSemibold';
+}
+
+.light {
+	 font-family: 'OpenSansLight';
+}
+    // background: linear-gradient(45deg, #312A6C, #852D91);
+	ul.list-group {
+		height: 100%;
+		margin-bottom: 0;
+		border: 1px solid black;
+		background: linear-gradient(0, #B066FE  ,#63E2FF);
 	}
-	ul.list-inline li a {
-		display: inline-block;
+	ul.list-group li a {
+		color: #000;
+		display: block;
 		text-transform: uppercase;
 		text-decoration: none;
 		padding: 15px 15px;
@@ -22,21 +53,43 @@ nav {
 				color: #fff;
 		}
 	}
-}
+
 
 .task {
-	margin-top: 100px;
+	margin-top: 50px;
+	p {
+		width: 100%;
+		height: 150px;
+		border: 1px solid black;
+		background-color: #fff;
+		color: #000;
+		font-size: 18px;
+		.light();
+	}
 	textarea {
 		width: 100%;
+		height: 320px;
+		text-align: left;
+		.bold();
+		color: #000;
+		font-size: 18px;
+	}
+}
+.ma {
+	.btn-lg {
+	margin-right: 20px;
+	.light();
+	border-radius: 0;
+	width: 300px;
 	}
 }
 
-.expect {
-	margin-top: 10px;
-	textarea {
-		height: 300px;
-		width: 100%;
-	}	
-}
+// .expect {
+// 	margin-top: 10px;
+// 	textarea {
+// 		height: 300px;
+// 		width: 100%;
+// 	}	
+// }
 
 
