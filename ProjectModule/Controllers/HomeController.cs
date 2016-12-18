@@ -11,7 +11,7 @@ namespace ProjectModule.Controllers
     {
         public ActionResult Index()
         {         
-            using (var db = new ProjectModuleDBEntities())
+            using (var db = new ProjectModuleDBEntities1())
             {
                 var tasks = db.Tasks.ToList();
                 ViewBag.Tasks = tasks;
