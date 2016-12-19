@@ -38,38 +38,54 @@ namespace ProjectModule.Models
                 switch (rule.Type)
                 {
                     case Rule.RuleType.XPath:
-                        result = CheckXPath(rule);
+                        result = CheckXPathResult(rule);
                         break;
                     case Rule.RuleType.XPathCss:
-                        result = CheckXPathCss(rule);
+                        result = CheckElementStyle(rule);
                         break;
                 }
                 if (!result)
                     return false;
             }
             return true;
-            var c = _doc.QuerySelector(".content");
-
-
-            var stylesheet = new Parser().Parse(_cssCode);
-            var color = stylesheet.StyleRules
-                .Where(r => r.Value.Equals(".b"))
-                .SelectMany(r => r.Declarations)
-                .FirstOrDefault(d => d.Name.Equals("color", StringComparison.InvariantCultureIgnoreCase))?
-                .Term
-                .ToString();
-
-            return true;
         }
 
-        public bool CheckXPath(Rule rule)
+        public bool CheckXPathResult(Rule rule)
         {
             return true;
         }
 
-        public bool CheckXPathCss(Rule rule)
+        public bool CheckXPathPresent(Rule rule)
         {
             return true;
+        }
+
+        public bool CheckElementStyle(Rule rule)
+        {
+            var nodeByXPath = _doc.SelectSingleNode(rule.XPathQuery);
+
+            foreach (var styleRule in _styleSheet.StyleRules)
+            {
+                string selector = styleRule.Value;
+                var nodeByCss = _doc.QuerySelector(selector);
+                if (nodeByCss == nodeByXPath)
+                {
+                    bool verified = true;
+                    foreach (var sampleProperty in rule.CssProperties)
+                    {
+                        var property = styleRule.Declarations
+                            .FirstOrDefault(d => d.Name.Equals(sampleProperty.Name));
+                        if (property == null || !property.Term.ToString()
+                            .Equals(sampleProperty.Value, StringComparison.InvariantCultureIgnoreCase))
+                        {
+                            verified = false;
+                            break;
+                        }
+                    }
+                    if (verified) return true;
+                }
+            }
+            return false;
         }
     }
 }

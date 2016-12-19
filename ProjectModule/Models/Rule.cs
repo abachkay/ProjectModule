@@ -14,12 +14,18 @@ namespace ProjectModule.Models
                 XPath,
                 XPathCss
             }
+
+            public class CssProperty
+            {
+                public string Name { get; set; }
+                public string Value { get; set; }
+            }
+
             public RuleType Type { get; set; }
             public string XPathQuery { get; set; }
             public string XPathResult { get; set; }
             public string CssSelector { get; set; }
-            public string CssAttribute { get; set; }
-            public string CssValue { get; set; }
+            public List<CssProperty> CssProperties { get; set; }
         }
     }
 }

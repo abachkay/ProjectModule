@@ -239,6 +239,7 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Rule.cs" />
     <Compile Include="Models\Task.cs" />
+    <Compile Include="Models\TaskVerifier.cs" />
     <Compile Include="ProjectModuleDBModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
