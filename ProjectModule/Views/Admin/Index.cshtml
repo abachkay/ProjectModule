@@ -17,56 +17,61 @@
         <button type="button" class="btn btn-danger center-block" name="create-task-button" style="border-radius: 50px">+</button>
     </div>
 
+<div class="row">
     <div class="col-md-1">
         <span style="font-size:20px; cursor:pointer" onclick="openNav()">&#9776; </span>
     </div>
-   
-    <div class="container">
+</div>
+    <div class="row" style="margin-top:25px;">
+
+        
+
+
         <!-- First row -->
-        <div class="row" style="margin-top:25px;">
-            <!-- Text area for task text (instruction) -->
-            <div class="col-md-6">
-                <textarea class="form-control" rows="15" id="task_text">Task text</textarea>
-            </div>
-
-            <!-- Html code -->
-            <div class="col-md-6">
-                <textarea class="form-control" rows="15" id="html_code">Html code</textarea>
-            </div>
+        <!-- Text area for task text (instruction) -->
+        <div class="col-md-6">
+            <textarea style="resize:none" class="form-control" rows="15" id="task_text">Task text</textarea>
         </div>
 
-        <!-- Second row-->
-        <div class="row" style="margin-top:15px;">
-            <div class="col-md-6">
-                <textarea class="form-control" rows="5" id="css_style_1"> //div.a@href </textarea>
-            </div>
-
-            <!-- Link -->
-            <div class="col-md-6">
-                <textarea class="form-control" rows="5" id="link"> Link </textarea>
-            </div>
-        </div>
-
-        <!-- Third row-->
-        <div class="row" style="margin-top:15px;">
-            <div class="col-md-6">
-                <textarea class="form-control" rows="5" id="css_style_2"> //div.a@href </textarea>
-            </div>
-
-            <div class="col-md-6">
-                <textarea  class="form-control" rows="5" id="css_style_3"> color-red </textarea>
-            </div>
-        </div>
-
-        <!-- Four row - Button add-->
-        <div class="row" style="margin-top:15px;">
-            <div class="col-md-12 center-block">
-                <button type="button"  name="add-parameter-button" class="btn btn-danger center-block" style="border-radius: 50px">
-                    +
-                </button>
-            </div>
+        <!-- Html code -->
+        <div class="col-md-5">
+            <textarea style="resize:none" class="form-control" rows="15" id="html_code">Html code</textarea>
         </div>
     </div>
+
+
+    <!-- Second row-->
+    <div class="row" style="margin-top:15px;">
+        <div class="col-md-6">
+            <textarea style="resize:none" class="form-control" rows="1" id="css_style_1"> //div.a@href </textarea>
+        </div>
+
+        <!-- Link -->
+        <div class="col-md-6">
+            <textarea style="resize:none" class="form-control" rows="1" id="link"> Link </textarea>
+        </div>
+    </div>
+
+    <!-- Third row-->
+    <div class="row" style="margin-top:15px;">
+        <div class="col-md-6">
+            <textarea style="resize:none" class="form-control" rows="1" id="css_style_2"> //div.a@href </textarea>
+        </div>
+
+        <div class="col-md-6">
+            <textarea style="resize:none" class="form-control" rows="1" id="css_style_3"> color-red </textarea>
+        </div>
+    </div>
+
+    <!-- Four row - Button add-->
+    <div class="row" style="margin-top:15px;">
+        <div class="col-md-12 center-block">
+            <button type="button" name="add-parameter-button" class="btn btn-danger center-block" style="border-radius: 50px">
+                +
+            </button>
+        </div>
+    </div>
+
 
     <div class="container-fluid" style="margin-top:15px;">
         <div class="row text-center ma">
