@@ -37,19 +37,29 @@ body {
 .light {
 	 font-family: 'OpenSansLight';
 }
-
-.task {
+.sp {
+	margin-top: 20px;
 	span {
-		.light();
-		font-size: 20px;
+		margin-left: 20px;
+		.bold();
+		font-size: 22px;
 		cursor: pointer;
 	}
-	margin-top: 50px;
+}
+
+.task {
+	
+	margin-top: 5px;
 	li a{
 		border-radius: 0;
 		.light();
 	}
+	p:nth-child(1) {
+		font-size: 24px;
+		.bold();
+	}
 	p {
+		margin-left: 20px;
 		font-size: 16px;
 		.light();
 	}
@@ -65,16 +75,18 @@ body {
 		.light();
 		font-size: 20px;
 	}
-}
-.ma {
+	.ma {
+	margin-bottom: 5px;
 	// margin-left: -90px;
 	.btn-lg {
 		margin-right: 10px; 
-		width: 200px;
+		width: auto;
 		border-radius: 0;
 		.light();
 	}
 }
+}
+
 
 .sidenav {
 	h1 {
@@ -124,4 +136,10 @@ body {
 @media screen and (max-height: 450px) {
   .sidenav {padding-top: 15px;}
   .sidenav a {font-size: 18px;}
+
+}
+@media screen and (min-width: 369px) {
+	.na {
+  		margin-bottom: 10px;
+  	}
 }

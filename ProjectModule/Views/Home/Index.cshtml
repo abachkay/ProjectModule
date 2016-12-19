@@ -14,22 +14,22 @@
     <a href="#">Task 8</a>
 </div>
 
-        <div class="container">
-            <div class="row task">
-                <div class="col-md-1">
+            <div class="row sp">
+                <div class="na col-md-2">
                     <span onclick="openNav()">&#9776; Tasks</span>
                 </div>
+            </div>
 
+            <div class="row task">
                 <div class="col-md-2">
-                    <p>
-                        <strong>Instructions</strong><br>
-                        On line 14, create an sized heading called 'List of things I find just OK'.
+                    <p>Instructions</p>
+                     <p> line 14, create an sized heading called 'List of things I find just OK'.
                         Starting on line 15, create an ordered list using the tag.
                         Your ordered list should have three items, each wrapped (i.e. surrounded) by tags.
                     </p>
                 </div>  
 
-                <div class="col-md-5">
+                <div class="ma col-md-5 text-center">
                     <!---- <textarea name="" id="e_sex" cols="30" rows="10" placeholder="Write code here..."></textarea> -->
                     <div id="tab">
                         <ul class="nav nav-pills">
@@ -50,9 +50,17 @@
                             </div>
                         </div>
                     </div>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-primary btn-lg">
+                            <span class="glyphicon glyphicon-ok"></span> Submit
+                        </button>
+                        <button type="button" class="btn btn-warning btn-lg">
+                            <span class="glyphicon glyphicon-refresh"></span> Reset
+                        </button>
+                    </div>
                 </div>
 
-                <div class="col-md-4">
+                <div class="col-md-5">
                     <div id="tab">
                         <ul class="nav nav-pills">
                             <li class="active">
@@ -75,20 +83,7 @@
                 </div>           
 
             </div>
-        </div>
-
-        <div class="container-fluid">
-            <div class="row text-center ma">
-                
-                    <div class="btn-group">
-                        <button type="button" class="btn btn-primary btn-lg">Submit</button>
-                        <button type="button" class="btn btn-warning btn-lg">Reset</button>
-                    </div>
-              
-             </div>
-        </div>
-        
-         
+       
 <script>
     function openNav() {
         document.getElementById("mySidenav").style.display = "block";
