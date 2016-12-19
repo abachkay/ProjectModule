@@ -14,86 +14,88 @@
     <a href="#">Task 8</a>
 </div>
 
-        <div class="row task">
-            
-            <div class="col-md-1">
-                <span style="font-size:20px;cursor:pointer" onclick="openNav()">&#9776; Tasks</span>
-                  
-            </div>
+        <div class="container">
+            <div class="row task">
+                <div class="col-md-1">
+                    <span onclick="openNav()">&#9776; Tasks</span>
+                </div>
 
-            <div class="col-md-2">
-                <p>
-                    <strong>Instructions</strong><br>
-                    On line 14, create an sized heading called 'List of things I find just OK'.
-                    Starting on line 15, create an ordered list using the tag.
-                    Your ordered list should have three items, each wrapped (i.e. surrounded) by tags.
-                </p>
-            </div>  
+                <div class="col-md-2">
+                    <p>
+                        <strong>Instructions</strong><br>
+                        On line 14, create an sized heading called 'List of things I find just OK'.
+                        Starting on line 15, create an ordered list using the tag.
+                        Your ordered list should have three items, each wrapped (i.e. surrounded) by tags.
+                    </p>
+                </div>  
 
-            <div class="col-md-5">
-                <!---- <textarea name="" id="e_sex" cols="30" rows="10" placeholder="Write code here..."></textarea> -->
-                <div id="tab" class="container">
-                    <ul class="nav nav-pills">
-                        <li class="active">
-                            <a href="#html" data-toggle="tab">index.html</a>
-                        </li>
-                        <li>
-                            <a href="#css" data-toggle="tab">style.css</a>
-                        </li>
-                    </ul>
+                <div class="col-md-5">
+                    <!---- <textarea name="" id="e_sex" cols="30" rows="10" placeholder="Write code here..."></textarea> -->
+                    <div id="tab">
+                        <ul class="nav nav-pills">
+                            <li class="active">
+                                <a href="#html" data-toggle="tab">index.html</a>
+                            </li>
+                            <li>
+                                <a href="#css" data-toggle="tab">style.css</a>
+                            </li>
+                        </ul>
 
-                    <div class="tab-content clearfix">
-                        <div class="tab-pane active" id="html">
-                            <textarea id="code" cols="30" rows="10" placeholder="Actual html"></textarea>
-                        </div>
-                        <div class="tab-pane" id="css">
-                            <textarea id="css" cols="30" rows="10" placeholder="Actual css"></textarea>
+                        <div class="tab-content clearfix">
+                            <div class="tab-pane active" id="html">
+                                <textarea id="code" cols="10" rows="10" placeholder="Actual html"></textarea>
+                            </div>
+                            <div class="tab-pane" id="css">
+                                <textarea id="css" cols="30" rows="10" placeholder="Actual css"></textarea>
+                            </div>
                         </div>
                     </div>
                 </div>
-           </div>
 
-           <div class="col-md-4">
-               <div id="tab" class="container">
-                   <ul class="nav nav-pills">
-                       <li class="active">
-                           <a href="#actual" data-toggle="tab">Actual result</a>
-                       </li>
-                       <li>
-                           <a href="#expect" data-toggle="tab">Expected result</a>
-                       </li>
-                   </ul>
+                <div class="col-md-4">
+                    <div id="tab">
+                        <ul class="nav nav-pills">
+                            <li class="active">
+                                <a href="#actual" data-toggle="tab">Actual result</a>
+                            </li>
+                            <li>
+                                <a href="#expect" data-toggle="tab">Expected result</a>
+                            </li>
+                        </ul>
 
-                   <div class="tab-content clearfix">
-                       <div class="tab-pane active" id="actual">
-                           <div id="actual">Actual result</div>
-                       </div>
-                       <div class="tab-pane" id="expect">
-                           <div id="expect">Expected result</div>
-                       </div>
-                   </div>
-               </div>
-          </div>            
+                        <div class="tab-content clearfix">
+                            <div class="tab-pane active" id="actual">
+                                <div id="actual">Actual result</div>
+                            </div>
+                            <div class="tab-pane" id="expect">
+                                <div id="expect">Expected result</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>           
+
+            </div>
         </div>
 
         <div class="container-fluid">
             <div class="row text-center ma">
+                
                     <div class="btn-group">
                         <button type="button" class="btn btn-primary btn-lg">Submit</button>
                         <button type="button" class="btn btn-warning btn-lg">Reset</button>
-                    </div> 
-         
+                    </div>
+              
              </div>
         </div>
         
          
 <script>
     function openNav() {
-        document.getElementById("mySidenav").style.width = "250px";
+        document.getElementById("mySidenav").style.display = "block";
     }
 
     function closeNav() {
-        document.getElementById("mySidenav").style.width = "0";
+        document.getElementById("mySidenav").style.display = "none";
     }
 </script>
        
