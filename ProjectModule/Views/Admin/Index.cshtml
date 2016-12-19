@@ -3,5 +3,92 @@
     ViewBag.Title = "Administrator page";
 }
 
-<tinymce> abc</tinymce>
-<button class="btn btn-danger">Danger</button>
+    <!-- Navigation bar -->
+    <div id="mySidenav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <h1>All tasks:</h1>
+
+        <a href="#">Task 1</a>
+        <a href="#">Task 2</a>
+        <a href="#">Task 3</a>
+        <a href="#">Task 4</a>
+        <a href="#">Task 5</a>
+
+        <button type="button" class="btn btn-danger center-block" name="create-task-button" style="border-radius: 50px">+</button>
+    </div>
+
+<div class="row">
+    <div class="col-md-1">
+        <span style="font-size:20px; cursor:pointer" onclick="openNav()">&#9776; </span>
+    </div>
+</div>
+    <div class="row" style="margin-top:25px;">
+
+        
+
+
+        <!-- First row -->
+        <!-- Text area for task text (instruction) -->
+        <div class="col-md-6">
+            <textarea style="resize:none" class="form-control" rows="15" id="task_text">Task text</textarea>
+        </div>
+
+        <!-- Html code -->
+        <div class="col-md-5">
+            <textarea style="resize:none" class="form-control" rows="15" id="html_code">Html code</textarea>
+        </div>
+    </div>
+
+
+    <!-- Second row-->
+    <div class="row" style="margin-top:15px;">
+        <div class="col-md-6">
+            <textarea style="resize:none" class="form-control" rows="1" id="css_style_1"> //div.a@href </textarea>
+        </div>
+
+        <!-- Link -->
+        <div class="col-md-6">
+            <textarea style="resize:none" class="form-control" rows="1" id="link"> Link </textarea>
+        </div>
+    </div>
+
+    <!-- Third row-->
+    <div class="row" style="margin-top:15px;">
+        <div class="col-md-6">
+            <textarea style="resize:none" class="form-control" rows="1" id="css_style_2"> //div.a@href </textarea>
+        </div>
+
+        <div class="col-md-6">
+            <textarea style="resize:none" class="form-control" rows="1" id="css_style_3"> color-red </textarea>
+        </div>
+    </div>
+
+    <!-- Four row - Button add-->
+    <div class="row" style="margin-top:15px;">
+        <div class="col-md-12 center-block">
+            <button type="button" name="add-parameter-button" class="btn btn-danger center-block" style="border-radius: 50px">
+                +
+            </button>
+        </div>
+    </div>
+
+
+    <div class="container-fluid" style="margin-top:15px;">
+        <div class="row text-center ma">
+            <div class="btn-group">
+                <button type="submit" name="save-task-button" class="btn btn-success btn-lg">Save</button>
+                <button type="button" name="delete-task-button" class="btn btn-danger btn-lg">Delete</button>
+            </div>
+        </div>
+    </div>
+
+    <!--   Open/Close navigation bar -->
+    <script>
+        function openNav() {
+            document.getElementById("mySidenav").style.width = "250px";
+        }
+
+        function closeNav() {
+            document.getElementById("mySidenav").style.width = "0";
+        }
+    </script>
