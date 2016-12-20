@@ -53,18 +53,29 @@
     <script>
 
         $(document).ready(function(){
-            $("#spa").click(function() {
-                $("#mySidenav").css("display", "block");
-                $("#container").css("opacity", "0.1");
-                event.stopPropagation();
+            $("#spa").click(function () {
+
+                $("#mySidenav").fadeOut(100 , function () {
+                    $("#mySidenav").css("display", "block");
+                    $("#container").animate({ opacity: 0.1 }, 500);
+                    $("#container").css("pointer-events", "inherit");
+                    event.stopPropagation();
+                });
+               
             });
-            $("#container").click(function () {
-                $("#mySidenav").css("display", "none");
-                $("#container").css("opacity", "1");
+
+            $("#container").click(function () {             
+                    $("#mySidenav").css("display", "none");
+                    $("#container").animate({ opacity: 1 }, 500);
+                    $("#container").css("pointer-events", "auto");                               
             });
+
             $("#close").click(function () {
-                $("#mySidenav").css("display", "none");
-                $("#container").css("opacity", "1");
+                $("#mySidenav").fadeIn(1000, function () {
+                    $("#mySidenav").css("display", "none");
+                    $("#container").animate({ opacity: 1 }, 500);
+                    $("#container").css("pointer-events", "auto");
+                });                           
             });
         });
         
