@@ -5,42 +5,42 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
       <Schema Namespace="ProjectModuleDBModel.Store" Provider="System.Data.SQLite.EF6" ProviderManifestToken="data source=C:\Users\bachkay\Documents\ProjectModule\ProjectModule\App_Data\ProjectModuleDB" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="Conditions">
+        <EntityType Name="Rule">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="integer" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="XPath" Type="nvarchar" MaxLength="10000" />
+          <Property Name="Type" Type="integer" />
+          <Property Name="Selector" Type="nvarchar" MaxLength="1000" />
           <Property Name="Value" Type="nvarchar" MaxLength="10000" />
           <Property Name="TaskId" Type="integer" Nullable="false" />
         </EntityType>
-        <EntityType Name="Tasks">
+        <EntityType Name="Task">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="integer" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="1000" />
           <Property Name="Description" Type="nvarchar" MaxLength="10000" />
-          <Property Name="HTML" Type="nvarchar" MaxLength="10000" />
-          <Property Name="CSS" Type="nvarchar" MaxLength="10000" />
         </EntityType>
-        <Association Name="FK_Conditions_0_0">
-          <End Role="Tasks" Type="Self.Tasks" Multiplicity="1" />
-          <End Role="Conditions" Type="Self.Conditions" Multiplicity="*" />
+        <Association Name="FK_Rule_0_0">
+          <End Role="Task" Type="Self.Task" Multiplicity="1" />
+          <End Role="Rule" Type="Self.Rule" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Tasks">
+            <Principal Role="Task">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="Conditions">
+            <Dependent Role="Rule">
               <PropertyRef Name="TaskId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="ProjectModuleDBModelStoreContainer">
-          <EntitySet Name="Conditions" EntityType="Self.Conditions" store:Type="Tables" />
-          <EntitySet Name="Tasks" EntityType="Self.Tasks" store:Type="Tables" />
-          <AssociationSet Name="FK_Conditions_0_0" Association="Self.FK_Conditions_0_0">
-            <End Role="Tasks" EntitySet="Tasks" />
-            <End Role="Conditions" EntitySet="Conditions" />
+          <EntitySet Name="Rule" EntityType="Self.Rule" store:Type="Tables" />
+          <EntitySet Name="Task" EntityType="Self.Task" store:Type="Tables" />
+          <AssociationSet Name="FK_Rule_0_0" Association="Self.FK_Rule_0_0">
+            <End Role="Task" EntitySet="Task" />
+            <End Role="Rule" EntitySet="Rule" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
@@ -48,44 +48,44 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="ProjectModuleDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="Conditions">
+        <EntityType Name="Rule">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="XPath" Type="String" MaxLength="10000" FixedLength="false" Unicode="true" />
+          <Property Name="Type" Type="Int64" />
+          <Property Name="Selector" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
           <Property Name="Value" Type="String" MaxLength="10000" FixedLength="false" Unicode="true" />
           <Property Name="TaskId" Type="Int64" Nullable="false" />
-          <NavigationProperty Name="Tasks" Relationship="Self.FK_Conditions_0_0" FromRole="Conditions" ToRole="Tasks" />
+          <NavigationProperty Name="Task" Relationship="Self.FK_Rule_0_0" FromRole="Rule" ToRole="Task" />
         </EntityType>
-        <EntityType Name="Tasks">
+        <EntityType Name="Task">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
           <Property Name="Description" Type="String" MaxLength="10000" FixedLength="false" Unicode="true" />
-          <Property Name="HTML" Type="String" MaxLength="10000" FixedLength="false" Unicode="true" />
-          <Property Name="CSS" Type="String" MaxLength="10000" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Conditions" Relationship="Self.FK_Conditions_0_0" FromRole="Tasks" ToRole="Conditions" />
+          <NavigationProperty Name="Rule" Relationship="Self.FK_Rule_0_0" FromRole="Task" ToRole="Rule" />
         </EntityType>
-        <Association Name="FK_Conditions_0_0">
-          <End Role="Tasks" Type="Self.Tasks" Multiplicity="1" />
-          <End Role="Conditions" Type="Self.Conditions" Multiplicity="*" />
+        <Association Name="FK_Rule_0_0">
+          <End Role="Task" Type="Self.Task" Multiplicity="1" />
+          <End Role="Rule" Type="Self.Rule" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Tasks">
+            <Principal Role="Task">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="Conditions">
+            <Dependent Role="Rule">
               <PropertyRef Name="TaskId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="ProjectModuleDBEntities1" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Conditions" EntityType="Self.Conditions" />
-          <EntitySet Name="Tasks" EntityType="Self.Tasks" />
-          <AssociationSet Name="FK_Conditions_0_0" Association="Self.FK_Conditions_0_0">
-            <End Role="Tasks" EntitySet="Tasks" />
-            <End Role="Conditions" EntitySet="Conditions" />
+        <EntityContainer Name="ProjectModuleDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Rule" EntityType="Self.Rule" />
+          <EntitySet Name="Task" EntityType="Self.Task" />
+          <AssociationSet Name="FK_Rule_0_0" Association="Self.FK_Rule_0_0">
+            <End Role="Task" EntitySet="Task" />
+            <End Role="Rule" EntitySet="Rule" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
@@ -93,24 +93,24 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="ProjectModuleDBModelStoreContainer" CdmEntityContainer="ProjectModuleDBEntities1">
-          <EntitySetMapping Name="Conditions">
-            <EntityTypeMapping TypeName="ProjectModuleDBModel.Conditions">
-              <MappingFragment StoreEntitySet="Conditions">
+        <EntityContainerMapping StorageEntityContainer="ProjectModuleDBModelStoreContainer" CdmEntityContainer="ProjectModuleDBEntities">
+          <EntitySetMapping Name="Rule">
+            <EntityTypeMapping TypeName="ProjectModuleDBModel.Rule">
+              <MappingFragment StoreEntitySet="Rule">
                 <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="XPath" ColumnName="XPath" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Selector" ColumnName="Selector" />
                 <ScalarProperty Name="Value" ColumnName="Value" />
                 <ScalarProperty Name="TaskId" ColumnName="TaskId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Tasks">
-            <EntityTypeMapping TypeName="ProjectModuleDBModel.Tasks">
-              <MappingFragment StoreEntitySet="Tasks">
+          <EntitySetMapping Name="Task">
+            <EntityTypeMapping TypeName="ProjectModuleDBModel.Task">
+              <MappingFragment StoreEntitySet="Task">
                 <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="HTML" ColumnName="HTML" />
-                <ScalarProperty Name="CSS" ColumnName="CSS" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

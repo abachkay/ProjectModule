@@ -12,20 +12,19 @@ namespace ProjectModule
     using System;
     using System.Collections.Generic;
     
-    public partial class Tasks
+    public partial class Task
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Tasks()
+        public Task()
         {
-            this.Conditions = new HashSet<Conditions>();
+            this.Rule = new HashSet<Rule>();
         }
     
         public long Id { get; set; }
+        public string Name { get; set; }
         public string Description { get; set; }
-        public string HTML { get; set; }
-        public string CSS { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Conditions> Conditions { get; set; }
+        public virtual ICollection<Rule> Rule { get; set; }
     }
 }

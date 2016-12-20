@@ -13,10 +13,10 @@ namespace ProjectModule
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class ProjectModuleDBEntities1 : DbContext
+    public partial class ProjectModuleDBEntities : DbContext
     {
-        public ProjectModuleDBEntities1()
-            : base("name=ProjectModuleDBEntities1")
+        public ProjectModuleDBEntities()
+            : base("name=ProjectModuleDBEntities")
         {
         }
     
@@ -25,7 +25,7 @@ namespace ProjectModule
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Conditions> Conditions { get; set; }
-        public virtual DbSet<Tasks> Tasks { get; set; }
+        public virtual DbSet<Rule> Rule { get; set; }
+        public virtual DbSet<Task> Task { get; set; }
     }
 }

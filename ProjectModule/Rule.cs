@@ -12,13 +12,14 @@ namespace ProjectModule
     using System;
     using System.Collections.Generic;
     
-    public partial class Conditions
+    public partial class Rule
     {
         public long Id { get; set; }
-        public string XPath { get; set; }
+        public Nullable<long> Type { get; set; }
+        public string Selector { get; set; }
         public string Value { get; set; }
         public long TaskId { get; set; }
     
-        public virtual Tasks Tasks { get; set; }
+        public virtual Task Task { get; set; }
     }
 }

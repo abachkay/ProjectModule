@@ -10,12 +10,14 @@ namespace ProjectModule.Controllers
     public class HomeController : Controller
     {
         public ActionResult Index()
-        {         
-            using (var db = new ProjectModuleDBEntities1())
-            {
-                var tasks = db.Tasks.ToList();
-                ViewBag.Tasks = tasks;
-            }
+        {
+            //using (var db = new ProjectModuleDBEntities())
+            //{
+            //    db.Task.Add(new Task() { Name="b" , Description="bla"});
+            //    db.SaveChanges();
+            //    db.Rule.Add(new Rule() { Type = 1, Selector = "//a/@id", Value = "google.com", TaskId = 1 });
+            //    db.SaveChanges();
+            //}
             return View();
         }        
     }
