@@ -44,7 +44,7 @@ namespace UnitTests
                     <head></head>
                     <body>
                         <div class='content'>Anchor</div>
-                        <a><div></div></a>
+                        <a><div></div></a><br>
                     </body>
                 </html>";
             string cssCode = @".content{color:red; background-color:white} .b{color:green}";
@@ -61,6 +61,32 @@ namespace UnitTests
                     }
                 }
             };            
+            Assert.IsTrue(new TaskVerifier(task, htmlCode, cssCode).Verify());
+        }
+        [TestMethod]
+        public void XpathPresentTest()
+        {
+            string htmlCode = @"
+                <html>
+                    <head></head>
+                    <body>
+                        <div class='content'>Anchor</div>
+                        <a><div></div></a><br>
+                    </body>
+                </html>";
+            string cssCode = @".content{color:red; background-color:white} .b{color:green}";
+            var task = new Task()
+            {
+                Description = "Bla-blah",
+                Rules = new List<Rule>()
+                {
+                    new Rule()
+                    {
+                        Type = Rule.RuleType.XPathElementPresent,
+                        Selector = "//a",                        
+                    }
+                }
+            };
             Assert.IsTrue(new TaskVerifier(task, htmlCode, cssCode).Verify());
         }
     }
