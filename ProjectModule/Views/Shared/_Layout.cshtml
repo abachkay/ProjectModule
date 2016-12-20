@@ -50,7 +50,25 @@
             ]
         });
     </script>
+    <script>
 
+        $(document).ready(function(){
+            $("#spa").click(function() {
+                $("#mySidenav").css("display", "block");
+                $("#container").css("opacity", "0.1");
+                event.stopPropagation();
+            });
+            $("#container").click(function () {
+                $("#mySidenav").css("display", "none");
+                $("#container").css("opacity", "1");
+            });
+            $("#close").click(function () {
+                $("#mySidenav").css("display", "none");
+                $("#container").css("opacity", "1");
+            });
+        });
+        
+    </script>
     @RenderSection("scripts", required: false)   
 </body>
 </html>

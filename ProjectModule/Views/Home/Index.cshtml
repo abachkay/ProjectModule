@@ -2,7 +2,7 @@
     ViewBag.Title = "Home Page";
 }
 <div id="mySidenav" class="sidenav">
-    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+    <a id="close" href="javascript:void(0)" class="closebtn">&times;</a>
     <h1>All tasks:</h1>
     <a href="#">Task 1</a>
     <a href="#">Task 2</a>
@@ -14,14 +14,14 @@
     <a href="#">Task 8</a>
 </div>
 
-        <div class="container-fluid">            
+        <div class="container-fluid" id="container">            
             <div class="row sp">
                 <div class="na col-md-2">
-                    <span onclick="openNav()">&#9776; Tasks</span>
+                    <span id="spa">&#9776; Tasks</span>
                 </div>
             </div>
 
-            <div class="row task">
+            <div class="row task" id="task">
                 <div class="col-md-2">
                     <p>Instructions</p>
                      <p> line 14, create an sized heading called 'List of things I find just OK'.
@@ -44,15 +44,15 @@
 
                         <div class="tab-content clearfix">
                             <div class="tab-pane active" id="html">
-                                <textarea id="code" cols="10" rows="10" placeholder="Actual html"></textarea>
+                                <textarea id="code" cols="10" rows="10"></textarea>
                             </div>
                             <div class="tab-pane" id="css">
-                                <textarea id="css" cols="30" rows="10" placeholder="Actual css"></textarea>
+                                <textarea id="css" cols="30" rows="10"></textarea>
                             </div>
                         </div>
                     </div>
                     <div class="btn-group">
-                        <button type="button" class="btn btn-primary btn-lg">
+                        <button type="button" id="sub" class="btn btn-primary btn-lg">
                             <span class="glyphicon glyphicon-ok"></span> Submit
                         </button>
                         <button type="button" class="btn btn-warning btn-lg">
@@ -86,12 +86,17 @@
         </div>
        
 <script>
-    function openNav() {
-        document.getElementById("mySidenav").style.display = "block";
-    }
+   // function openNav() {
+     //   document.getElementById("mySidenav").style.display = "block";
+       // document.getElementById("container").style.opacity = "0.1";
+    //}
 
     function closeNav() {
-        document.getElementById("mySidenav").style.display = "none";
+        //document.getElementById("mySidenav").style.display = "none";
+        //document.getElementById("container").style.opacity = "1";
+        
     }
+   // closeNav();
+
 </script>
        
