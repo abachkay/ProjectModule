@@ -3,75 +3,76 @@
     ViewBag.Title = "Administrator page";
 }
 
-<div id="mySidenav" class="sidenav">
-    <a id="close" href="javascript:void(0)" class="closebtn">&times;</a>
-    <h1>All tasks:</h1>
-    <a href="#">Task 1</a>
-    <a href="#">Task 2</a>
-    <a href="#">Task 3</a>
-    <a href="#">Task 4</a>
-    <a href="#">Task 5</a>
-    <a href="#">Task 6</a>
-    <a href="#">Task 7</a>
-    <a href="#">Task 8</a>
-    <button type="button" class="btn btn-danger center-block" name="create-task-button" style="border-radius: 50px">+</button>
-</div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+           
+                <div class="list-group" title="TASKS" style="margin-top:80px; max-width:100%; min-width: 40%;">
+                    <a href="#" class="list-group-item disabled"><b>Tasks</b></a> 
+                    <a href="#" class="list-group-item">Task</a>
+                    <a href="#" class="list-group-item">Task</a>
+                    <a href="#" class="list-group-item">Task</a>
+                    <a href="#" class="list-group-item">Task</a>
+                    <a href="#" class="list-group-item">Task</a>
+                    <a href="#" class="list-group-item">Task</a>
+                    <a href="#" class="list-group-item">Task</a>
+                </div>
+
+                <button type="button" class="btn btn-danger center-block" name="create-task-button" style="border-radius: 50px">+</button>
+            </div>
+
+            <div class="col-md-9">
+                <div class="row" style="margin-top:25px;">
+                    <!-- Nested rows -->
+                    <div class="row">
+                        <h2 class="h3" style="text-align:center;">Task text</h2>
+                    </div>
+                    <!-- Text area for task text (instruction) -->
+                    <div class="col-lg-12">
+                        <textarea style="resize:none" class="form-control" rows="15" id="task_text"></textarea>
+                    </div>
+                </div>
 
 
+                <!-- Second row-->
+                <div class="row" style="margin-top:15px;">
+                    <!-- Create title for Rules -->
+                    <div class="row">
+                        <h2 class="h3" style="text-align:center;">Rules</h2>
+                    </div>
 
-<div class="row">
-    <div class="row sp">
-        <div class="na col-md-2">
-            <span id="spa">&#9776; Tasks</span>
-        </div>
-    </div>
-</div>
-    <div class="row" style="margin-top:25px;">
+                    <!-- CheckBox with rules type -->
+                    <div class="col-md-2">
+                        <select>
+                            <option value="Option">Option</option>
+                            <option value="Option">Option</option>
+                            <option value="Option">Option</option>
+                            <option value="Option">Option</option>
+                        </select>
+                    </div>
 
+                    <div class="col-md-4">
+                        <textarea style="resize:none" class="form-control" rows="1" id="link"></textarea>
+                    </div>
 
-        <!-- First row -->
-        <!-- Text area for task text (instruction) -->
-        <div class="col-md-6">
-            <textarea style="resize:none" class="form-control" rows="15" id="task_text">Task text</textarea>
-        </div>
+                    <div class="col-md-4">
+                        <textarea style="resize:none" class="form-control" rows="1" id="link"></textarea>
+                    </div>
 
-        <!-- Html code -->
-        <div class="col-md-5">
-            <textarea style="resize:none" class="form-control" rows="15" id="html_code">Html code</textarea>
-        </div>
-    </div>
+                    <div class="col-md-1">
+                        <button type="button" name="add-parameter-button" class="btn btn-danger center-block" style="border-radius: 50px">-</button>
+                    </div>
+                </div>
 
+                <!-- Four row - Button add-->
+                <div class="row" style="margin-top:15px;">
+                    <div class="col-md-12 center-block">
+                        <button type="button" name="add-parameter-button" class="btn btn-danger center-block" style="border-radius: 50px">+</button>
+                    </div>
+                </div>
+            </div>
 
-    <!-- Second row-->
-    <div class="row" style="margin-top:15px;">
-        <div class="col-md-6">
-            <textarea style="resize:none" class="form-control" rows="1" id="css_style_1"> //div.a@href </textarea>
-        </div>
-
-        <!-- Link -->
-        <div class="col-md-6">
-            <textarea style="resize:none" class="form-control" rows="1" id="link"> Link </textarea>
-        </div>
-    </div>
-
-    <!-- Third row-->
-    <div class="row" style="margin-top:15px;">
-        <div class="col-md-6">
-            <textarea style="resize:none" class="form-control" rows="1" id="css_style_2"> //div.a@href </textarea>
-        </div>
-
-        <div class="col-md-6">
-            <textarea style="resize:none" class="form-control" rows="1" id="css_style_3"> color-red </textarea>
-        </div>
-    </div>
-
-    <!-- Four row - Button add-->
-    <div class="row" style="margin-top:15px;">
-        <div class="col-md-12 center-block">
-            <button type="button" name="add-parameter-button" class="btn btn-danger center-block" style="border-radius: 50px">
-                +
-            </button>
-        </div>
+        </div>   
     </div>
 
 
@@ -83,10 +84,3 @@
             </div>
         </div>
     </div>
-
-    <!--   Open/Close navigation bar -->
-    <script>
-        function closeNav() {
-
-        }
-    </script>
