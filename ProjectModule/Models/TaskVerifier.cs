@@ -6,6 +6,8 @@ using ProjectModule.Models.Testing;
 using Fizzler.Systems.HtmlAgilityPack;
 using HtmlAgilityPack;
 using ExCSS;
+using System.IO;
+using System.Xml.XPath;
 
 namespace ProjectModule.Models
 {
@@ -60,7 +62,16 @@ namespace ProjectModule.Models
 
         public bool CheckXPathQueryResult(Rule rule)
         {
-            return true;
+            var html = "<html>" + _htmlCode + "</html>";
+            using (StringReader stream = new StringReader(html))
+            {
+                
+                XPathDocument doc = new XPathDocument(stream);
+                XPathNavigator navigator = doc.CreateNavigator();
+                if (navigator.Evaluate(navigator.Compile(rule.Selector)).ToString() == rule.Value)
+                    return true;
+            }
+            return false;
         }
 
         public bool CheckXPathPresent(Rule rule)
