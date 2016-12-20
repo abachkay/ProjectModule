@@ -61,18 +61,9 @@ namespace ProjectModule.Models
         }
 
         public bool VerifyXPathQueryResult(Rule rule)
-        {
-            var html = "<html>" + _htmlCode + "</html>";
-            html = html.Replace("<br>", "<br/>");
-            using (StringReader stream = new StringReader(html))
-            {
-                
-                XPathDocument doc = new XPathDocument(stream);
-                XPathNavigator navigator = doc.CreateNavigator();
-                if (navigator.Evaluate(navigator.Compile(rule.Selector)).ToString() == rule.Value)
-                    return true;
-            }
-            return false;
+        {         
+            XPathNavigator navigator = _html.CreateNavigator();
+            return navigator.Evaluate(navigator.Compile(rule.Selector)).ToString() == rule.Value;
         }
 
         public bool VerifyXPathPresent(Rule rule)
