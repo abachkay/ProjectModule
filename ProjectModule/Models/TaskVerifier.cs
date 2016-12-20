@@ -63,6 +63,7 @@ namespace ProjectModule.Models
         public bool VerifyXPathQueryResult(Rule rule)
         {
             var html = "<html>" + _htmlCode + "</html>";
+            html = html.Replace("<br>", "<br/>");
             using (StringReader stream = new StringReader(html))
             {
                 
@@ -76,6 +77,9 @@ namespace ProjectModule.Models
 
         public bool VerifyXPathPresent(Rule rule)
         {
+            var elements = _htmlInlined.DocumentNode.SelectNodes(rule.Selector);
+            if (elements == null)
+                return false;
             return true;
         }
 
