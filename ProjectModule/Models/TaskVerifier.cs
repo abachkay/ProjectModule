@@ -11,12 +11,13 @@ namespace ProjectModule.Models
 {
     public class TaskVerifier
     {
-        private Task _task;
-        private string _htmlCode;
-        private string _cssCode;
-        private HtmlDocument _html;
-        private HtmlNode _doc;
-        private StyleSheet _styleSheet;
+        private readonly Task _task;
+        private readonly string _htmlCode;
+        private readonly string _cssCode;
+
+        private readonly HtmlDocument _html;
+        private readonly HtmlDocument _htmlInlined;
+        private readonly StyleSheet _styleSheet;
 
         public TaskVerifier(Task task, string htmlCode, string cssCode)
         {
@@ -25,23 +26,30 @@ namespace ProjectModule.Models
             _cssCode = cssCode;
             _html = new HtmlDocument();
             _html.LoadHtml(htmlCode);
-            _doc = _html.DocumentNode;
 
             _styleSheet = new Parser().Parse(_cssCode);
+
+            var htmlCodeWithCssInlined = new PreMailer.Net.PreMailer(_htmlCode)
+                .MoveCssInline(true, null, _cssCode, false, true).Html;
+            _htmlInlined = new HtmlDocument();
+            _htmlInlined.LoadHtml(htmlCodeWithCssInlined);
         }
 
-        public bool Check()
+        public bool Verify()
         {
             foreach (var rule in _task.Rules)
             {
                 bool result = true;
                 switch (rule.Type)
                 {
-                    case Rule.RuleType.XPath:
-                        result = CheckXPathResult(rule);
+                    case Rule.RuleType.XPathQuery:
+                        result = CheckXPathQueryResult(rule);
                         break;
-                    case Rule.RuleType.XPathCss:
-                        result = CheckElementStyle(rule);
+                    case Rule.RuleType.XPathElementStyle:
+                        result = VerifyElementStyle(rule);
+                        break;
+                    case Rule.RuleType.XPathElementAttributes:
+                        result = CheckElementAttributes(rule);
                         break;
                 }
                 if (!result)
@@ -50,7 +58,7 @@ namespace ProjectModule.Models
             return true;
         }
 
-        public bool CheckXPathResult(Rule rule)
+        public bool CheckXPathQueryResult(Rule rule)
         {
             return true;
         }
@@ -60,31 +68,52 @@ namespace ProjectModule.Models
             return true;
         }
 
-        public bool CheckElementStyle(Rule rule)
+        public bool VerifyElementStyle(Rule rule)
         {
-            var nodeByXPath = _doc.SelectSingleNode(rule.XPathQuery);
+            //element presence
+            var elements = _htmlInlined.DocumentNode.SelectNodes(rule.Selector);
+            if (elements == null)
+                return false;
+            var ruleStyleProperties =
+                new ExCSS.Parser().Parse("{" + rule.Value + "}")
+                .StyleRules[0].Declarations.Properties;
 
-            foreach (var styleRule in _styleSheet.StyleRules)
+            foreach (var element in elements)
             {
-                string selector = styleRule.Value;
-                var nodeByCss = _doc.QuerySelector(selector);
-                if (nodeByCss == nodeByXPath)
+                var styleAttributeValue = element.GetAttributeValue("style", "");
+                if (styleAttributeValue == null)
+                    continue;
+
+                var styleProperties = 
+                    new ExCSS.Parser().Parse("{" + styleAttributeValue + "}")
+                    .StyleRules[0].Declarations.Properties;
+
+                bool success = true;
+                // check all css properties
+                foreach (var ruleStyleProperty in ruleStyleProperties)
                 {
-                    bool verified = true;
-                    foreach (var sampleProperty in rule.CssProperties)
+                    var actualStyleProperty =
+                        styleProperties.LastOrDefault(x => x.Name == ruleStyleProperty.Name);
+                    if (actualStyleProperty == null ||
+                        actualStyleProperty.Term.ToString() != ruleStyleProperty.Term.ToString())
                     {
-                        var property = styleRule.Declarations
-                            .FirstOrDefault(d => d.Name.Equals(sampleProperty.Name));
-                        if (property == null || !property.Term.ToString()
-                            .Equals(sampleProperty.Value, StringComparison.InvariantCultureIgnoreCase))
-                        {
-                            verified = false;
-                            break;
-                        }
+                        success = false;
+                        break;
                     }
-                    if (verified) return true;
                 }
+                if (success)
+                    return true;
             }
+            return false;
+        }
+
+        private bool CheckElementAttributes(Rule rule)
+        {
+//        //attributes
+//        if (rule.Attributes != null)
+//            foreach (var attribute in rule.Attributes)
+//                if (element.GetAttributeValue(attribute.Name, "") != attribute.Value)
+//                    folowed = false;
             return false;
         }
     }

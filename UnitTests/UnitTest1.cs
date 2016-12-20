@@ -22,22 +22,18 @@ namespace UnitTests
             string cssCode = @".content{color:red; background-color:white} .b{color:green}";
             var task = new Task()
             {
-                Text = "Bla-blah",
+                Description = "Bla-blah",
                 Rules = new List<Rule>()
                 {
                     new Rule()
                     {
-                        Type = Rule.RuleType.XPathCss,
-                        XPathQuery = "//div",
-                        CssProperties = new List<Rule.CssProperty>()
-                        {
-                            new Rule.CssProperty() {Name = "color", Value = "red"},
-                            new Rule.CssProperty() {Name = "background-color", Value = "white"}
-                        }
+                        Type = Rule.RuleType.XPathElementStyle,
+                        Selector = "//div",
+                        Value = "color:red; background-color:white"
                     }
                 }
             };
-            bool passed = new TaskVerifier(task, htmlCode, cssCode).Check();
+            bool passed = new TaskVerifier(task, htmlCode, cssCode).Verify();
             Assert.IsTrue(passed);
         }
     }

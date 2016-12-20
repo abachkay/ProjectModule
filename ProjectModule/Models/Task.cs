@@ -9,7 +9,7 @@ namespace ProjectModule.Models
     {
         public class Task
         {
-            public string Text { get; set; }
+            public string Description { get; set; }
             public List<Rule> Rules { get; set; } 
         }
     }
