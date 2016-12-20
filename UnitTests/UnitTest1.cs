@@ -65,5 +65,33 @@ namespace UnitTests
             bool passed = new TaskVerifier(task, htmlCode, cssCode).Verify();
             Assert.IsTrue(passed);
         }
+
+        [TestMethod]
+        public void XpathQueryTest()
+        {
+            string htmlCode = @"
+                <html>
+                    <head></head>
+                    <body>
+                        <div class='content'>Anchor</div>
+                        <a><div></div></a>
+                    </body>
+                </html>";
+            string cssCode = @".content{color:red; background-color:white} .b{color:green}";
+            var task = new Task()
+            {
+                Description = "Bla-blah",
+                Rules = new List<Rule>()
+                {
+                    new Rule()
+                    {
+                        Type = Rule.RuleType.XPathQuery,
+                        Selector = "count(//div)",
+                        Value = "2"
+                    }
+                }
+            };            
+            Assert.IsTrue(new TaskVerifier(task, htmlCode, cssCode).Verify());
+        }
     }
 }
