@@ -43,13 +43,13 @@ namespace ProjectModule.Models
                 switch (rule.Type)
                 {
                     case Rule.RuleType.XPathQuery:
-                        result = CheckXPathQueryResult(rule);
+                        result = VerifyXPathQueryResult(rule);
                         break;
                     case Rule.RuleType.XPathElementStyle:
                         result = VerifyElementStyle(rule);
                         break;
                     case Rule.RuleType.XPathElementAttributes:
-                        result = CheckElementAttributes(rule);
+                        result = VerifyElementAttributes(rule);
                         break;
                 }
                 if (!result)
@@ -58,12 +58,12 @@ namespace ProjectModule.Models
             return true;
         }
 
-        public bool CheckXPathQueryResult(Rule rule)
+        public bool VerifyXPathQueryResult(Rule rule)
         {
             return true;
         }
 
-        public bool CheckXPathPresent(Rule rule)
+        public bool VerifyXPathPresent(Rule rule)
         {
             return true;
         }
@@ -107,13 +107,38 @@ namespace ProjectModule.Models
             return false;
         }
 
-        private bool CheckElementAttributes(Rule rule)
+        private bool VerifyElementAttributes(Rule rule)
         {
-//        //attributes
-//        if (rule.Attributes != null)
-//            foreach (var attribute in rule.Attributes)
-//                if (element.GetAttributeValue(attribute.Name, "") != attribute.Value)
-//                    folowed = false;
+            //element presence
+            var elements = _html.DocumentNode.SelectNodes(rule.Selector);
+            if (elements == null)
+                return false;
+            var attributesHtml = new HtmlDocument();
+            attributesHtml.LoadHtml("<div " + rule.Value + "></div>");
+            var ruleAttributes = attributesHtml.DocumentNode.FirstChild.Attributes;
+
+            foreach (var element in elements)
+            {
+                var elementAttributes = element.Attributes;
+                if (elementAttributes == null)
+                    continue;
+
+                bool success = true;
+                // check allattributes
+                foreach (var ruleAttribute in ruleAttributes)
+                {
+                    var actualAttribute =
+                        elementAttributes.LastOrDefault(x => x.Name == ruleAttribute.Name);
+                    if (actualAttribute == null ||
+                        actualAttribute.Value != ruleAttribute.Value)
+                    {
+                        success = false;
+                        break;
+                    }
+                }
+                if (success)
+                    return true;
+            }
             return false;
         }
     }
