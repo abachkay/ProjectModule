@@ -14,7 +14,7 @@ namespace ProjectModule.Models.Tests
         [TestMethod()]
         public void VerifyXPathQueryResultTest()
         {
-            var html = "<a href='google.com'></a>";
+            var html = "<a href='google.com'></a> <a href='wikipedia.org'></a>";
             var css = "";
             Task task = new Task()
             {
@@ -25,9 +25,8 @@ namespace ProjectModule.Models.Tests
                 {
                     new Rule()
                     {
-                        Id = 1, Selector = "//a/@href", Task = null,
-                        TaskId = 1, Type = (long)TaskType.XPathQuery,
-                        Value = "'google.com'"
+                        Id = 1, Selector = "count(//a) = 2", Task = null,
+                        TaskId = 1, Type = (long)TaskType.XPathQuery
                     }
                 }
             };
