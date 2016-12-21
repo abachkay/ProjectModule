@@ -66,5 +66,18 @@ namespace ProjectModule.Controllers
             }                            
             return RedirectToAction("Index", new { taskId=taskId});
         }
+        [HttpGet]
+        public ActionResult NextTask(int taskId)
+        {
+            using (var db = new ProjectModuleDBEntities())
+            {
+                var task = db.Task.Where(x => x.Id > taskId).FirstOrDefault();
+                if (task != null)
+                    taskId = (int)task.Id;
+                else
+                    taskId = (int)db.Task.FirstOrDefault().Id;
+            }
+            return RedirectToAction("Index", new { taskId = taskId });
+        }
     }
 }
