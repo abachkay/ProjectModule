@@ -30,6 +30,7 @@ namespace ProjectModule.Controllers
                 ViewBag.Tasks = db.Task.ToList();
                 var task=db.Task.ToList().Where(x=>x.Id==taskId).FirstOrDefault();
                 ViewBag.CurrentTask = (task == null ?db.Task.FirstOrDefault():task);
+                ViewBag.TaskResult = "Правильно";                
             }
             return View();
         }
