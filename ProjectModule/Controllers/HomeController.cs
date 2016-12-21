@@ -11,13 +11,13 @@ namespace ProjectModule.Controllers
     {
         public ActionResult Index()
         {
-            //using (var db = new ProjectModuleDBEntities())
-            //{
-            //    db.Task.Add(new Task() { Name="b" , Description="bla"});
-            //    db.SaveChanges();
-            //    db.Rule.Add(new Rule() { Type = 1, Selector = "//a/@id", Value = "google.com", TaskId = 1 });
-            //    db.SaveChanges();
-            //}
+            using (var db = new ProjectModuleDBEntities())
+            {
+                var html = "<a href='google.com'></a>";
+                var css = "";
+                ViewBag.V1=new TaskVerifier(db.Task.FirstOrDefault(), html, css).Verify().ToString();
+                ViewBag.V2 = new TaskVerifier(db.Task.ToList().ElementAt(1), html, css).Verify().ToString();
+            }
             return View();
         }        
     }
