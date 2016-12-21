@@ -35,70 +35,45 @@ namespace ProjectModule.Controllers
             return Json(task);
         }
 
-//        // PUT: api/Tasks/5
-//        public IHttpActionResult PutTask(long id, Task task)
-//        {
-//            if (!ModelState.IsValid)
-//            {
-//                return BadRequest(ModelState);
-//            }
-//
-//            if (id != task.Id)
-//            {
-//                return BadRequest();
-//            }
-//
-//            db.Entry(task).State = EntityState.Modified;
-//
-//            try
-//            {
-//                db.SaveChanges();
-//            }
-//            catch (DbUpdateConcurrencyException)
-//            {
-//                if (!TaskExists(id))
-//                {
-//                    return NotFound();
-//                }
-//                else
-//                {
-//                    throw;
-//                }
-//            }
-//
-//            return StatusCode(HttpStatusCode.NoContent);
-//        }
-
-        // POST: api/tasks
+        // POST: api/tasks/set
         [HttpPost]
+        [Route("api/tasks/set")]
         public IHttpActionResult SetTask(Task task)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-            db.Entry(db.Task.Find(task.Id)).CurrentValues.SetValues(task);
+            var old = db.Task.Find(task.Id);
+            if (old == null)
+            {
+                var newTask = (db.Task.Add(task));
+                db.SaveChanges();
+                return Json(newTask);
+            }
+
+            db.Entry(old).CurrentValues.SetValues(task);
 
             db.SaveChanges();
 
             return Json(db.Task.Find(task.Id));
         }
 
-        // DELETE: api/Tasks/5
-//        [ResponseType(typeof(Task))]
-//        public IHttpActionResult DeleteTask(long id)
-//        {
-//            Task task = db.Task.Find(id);
-//            if (task == null)
-//            {
-//                return NotFound();
-//            }
-//
-//            db.Task.Remove(task);
-//            db.SaveChanges();
-//
-//            return Ok(task);
-//        }
+        [HttpGet]
+        [Route("api/tasks/delete/{id}")]
+        public IHttpActionResult DeleteTask(long id)
+        {
+            Task task = db.Task.Find(id);
+            if (task == null)
+            {
+                return NotFound();
+            }
+
+            db.Task.Remove(task);
+            db.SaveChanges();
+
+            return Ok();
+        }
 
         protected override void Dispose(bool disposing)
         {
