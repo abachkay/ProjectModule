@@ -23,7 +23,7 @@ namespace ProjectModule.Controllers
         }
 
         // GET: api/Tasks/5
-        [ResponseType(typeof(Task))]
+        [HttpGet]
         public IHttpActionResult GetTask(long id)
         {
             Task task = db.Task.Find(id);
@@ -32,74 +32,73 @@ namespace ProjectModule.Controllers
                 return NotFound();
             }
 
-            return Ok(task);
+            return Json(task);
         }
 
-        // PUT: api/Tasks/5
-        [ResponseType(typeof(void))]
-        public IHttpActionResult PutTask(long id, Task task)
+//        // PUT: api/Tasks/5
+//        public IHttpActionResult PutTask(long id, Task task)
+//        {
+//            if (!ModelState.IsValid)
+//            {
+//                return BadRequest(ModelState);
+//            }
+//
+//            if (id != task.Id)
+//            {
+//                return BadRequest();
+//            }
+//
+//            db.Entry(task).State = EntityState.Modified;
+//
+//            try
+//            {
+//                db.SaveChanges();
+//            }
+//            catch (DbUpdateConcurrencyException)
+//            {
+//                if (!TaskExists(id))
+//                {
+//                    return NotFound();
+//                }
+//                else
+//                {
+//                    throw;
+//                }
+//            }
+//
+//            return StatusCode(HttpStatusCode.NoContent);
+//        }
+
+        // POST: api/tasks
+        [HttpPost]
+        public IHttpActionResult SetTask(Task task)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
+            db.Entry(db.Task.Find(task.Id)).CurrentValues.SetValues(task);
 
-            if (id != task.Id)
-            {
-                return BadRequest();
-            }
-
-            db.Entry(task).State = EntityState.Modified;
-
-            try
-            {
-                db.SaveChanges();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!TaskExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return StatusCode(HttpStatusCode.NoContent);
-        }
-
-        // POST: api/Tasks
-        [ResponseType(typeof(Task))]
-        public IHttpActionResult PostTask(Task task)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            db.Task.Add(task);
             db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = task.Id }, task);
+            return Json(db.Task.Find(task.Id));
         }
 
         // DELETE: api/Tasks/5
-        [ResponseType(typeof(Task))]
-        public IHttpActionResult DeleteTask(long id)
-        {
-            Task task = db.Task.Find(id);
-            if (task == null)
-            {
-                return NotFound();
-            }
-
-            db.Task.Remove(task);
-            db.SaveChanges();
-
-            return Ok(task);
-        }
+//        [ResponseType(typeof(Task))]
+//        public IHttpActionResult DeleteTask(long id)
+//        {
+//            Task task = db.Task.Find(id);
+//            if (task == null)
+//            {
+//                return NotFound();
+//            }
+//
+//            db.Task.Remove(task);
+//            db.SaveChanges();
+//
+//            return Ok(task);
+//        }
 
         protected override void Dispose(bool disposing)
         {

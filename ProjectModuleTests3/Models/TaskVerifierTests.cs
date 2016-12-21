@@ -25,7 +25,7 @@ namespace ProjectModule.Models.Tests
                 {
                     new Rule()
                     {
-                        Id = 1, Selector = "//a/@href", Task = null,
+                        Id = 1, Selector = "//a/@href",
                         TaskId = 1, Type = (long)TaskType.XPathQuery,
                         Value = "'google.com'"
                     }
@@ -48,7 +48,7 @@ namespace ProjectModule.Models.Tests
                 {
                     new Rule()
                     {
-                        Id = 1, Selector = "//a", Task = null,
+                        Id = 1, Selector = "//a",
                         TaskId = 1, Type = (long)TaskType.XPathPresent,
                     }
                 }
@@ -74,7 +74,7 @@ namespace ProjectModule.Models.Tests
                 {
                     new Rule()
                     {
-                        Id = 1, Selector = "//div[@id='a1']", Task = null,
+                        Id = 1, Selector = "//div[@id='a1']",
                         TaskId = 1, Type = (long)TaskType.XPathElementStyle,
                         Value = "color:red"
                     }
