@@ -26,7 +26,7 @@
 
                 <div class="ma col-md-5 text-center">
                     <!---- <textarea name="" id="e_sex" cols="30" rows="10" placeholder="Write code here..."></textarea> -->
-                    @using (Html.BeginForm("Verify", "Home", new { taskId=ViewBag.CurrentTask.Id },FormMethod.Post))
+                    @using (Html.BeginForm("Verify", "Home", new { taskId = ViewBag.CurrentTask.Id }, FormMethod.Post))
                     {
                     <div id="tab">
                         <ul class="nav nav-pills">
@@ -54,9 +54,12 @@
                         <button type="button" class="btn btn-warning btn-lg">
                             <span class="glyphicon glyphicon-refresh"></span> Reset
                         </button>
+@if (ViewBag.TaskResult == "Correct")
+{
                         <button type="button" class="btn btn-info btn-lg">
                             <span class="glyphicon glyphicon-circle-arrow-right"></span> Next question
                         </button>
+}
                     </div>
                     }
                 </div>
@@ -86,18 +89,20 @@
 
             <div class="row">
                 <div class="col-md-offset-3 col-md-3 text-center">
+@if (ViewBag.TaskResult == "Correct")
+{
                     <div class="alert alert-success">
                         <strong>Success test!</strong>
                     </div>
+}
+@if (ViewBag.TaskResult == "Incorrect")
+{
                     <div class="alert alert-danger">
                         <strong>Failed test!</strong>
                     </div>
+}
                 </div>               
-            </div>
-             @if (ViewBag.TaskResult != null)
-            {
-               <div class="text-center">@ViewBag.TaskResult</div>
-            }
+            </div>           
         </div>
        
 <script>

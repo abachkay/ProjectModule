@@ -32,9 +32,9 @@ namespace ProjectModule.Controllers
                 ViewBag.CurrentTask = (task == null ?db.Task.FirstOrDefault():task);
                 if (TempData["TaskResult"]!=null)
                     if(TempData["TaskResult"].ToString()=="Correct")
-                        ViewBag.TaskResult = "Правильно";
+                        ViewBag.TaskResult = "Correct";
                     else
-                        ViewBag.TaskResult = "Неправильно";
+                        ViewBag.TaskResult = "Incorrect";
             }
             return View();
         }
