@@ -42,6 +42,8 @@ namespace ProjectModule.Controllers
                     ViewBag.PreviousHtmlCode = TempData["PreviousHtmlCode"];
                 if (TempData["PreviousCssCode"] != null)
                     ViewBag.PreviousCssCode = TempData["PreviousCssCode"];
+                if(TempData["PreviousHtmlCode"] != null&& TempData["PreviousCssCode"]!=null)                
+                    ViewBag.InlinedCode = new PreMailer.Net.PreMailer(TempData["PreviousHtmlCode"].ToString()).MoveCssInline(true, null, TempData["PreviousCssCode"].ToString(), false, true).Html;                
             }
             return View();
         }

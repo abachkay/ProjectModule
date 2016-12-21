@@ -118,7 +118,13 @@
                 <div class="tab-content clearfix">
                     <div class="tab-pane active" id="actual">
                         <div id="wrapper-actual">
-                            
+@*                            @if (ViewBag.InlinedCode != null)*@
+@*                            {*@
+@*                                var str = new HtmlString(ViewBag.InlinedCode);*@
+@*                                <div class="section" id="contentContainer">*@
+@*                                    @str*@
+@*                                </div>*@
+@*                            }*@
                         </div>
                     </div>
                     <div class="tab-pane" id="expect">
