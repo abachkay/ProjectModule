@@ -109,12 +109,25 @@
      //   document.getElementById("mySidenav").style.display = "block";
        // document.getElementById("container").style.opacity = "0.1";
     //}
-
+    
+    var myCodeMirror_1 = CodeMirror.fromTextArea(document.getElementById('code'), {
+        lineNumbers: true,               // показывать номера строк
+        matchBrackets: true,             // подсвечивать парные скобки
+        mode: 'html', // стиль подсветки
+        htmlMode: true,
+        indentUnit: 4                    // размер табуляции
+    });
     function closeNav() {
         //document.getElementById("mySidenav").style.display = "none";
         //document.getElementById("container").style.opacity = "1";
 
     }
-
+    var myCodeMirror_css = CodeMirror.fromTextArea(document.getElementById('css'), {
+        lineNumbers: true,               // показывать номера строк
+        matchBrackets: true,             // подсвечивать парные скобки
+        mode: 'css', // стиль подсветки
+        htmlMode: true,
+        indentUnit: 4                    // размер табуляции
+    });
    // closeNav();
 </script>
