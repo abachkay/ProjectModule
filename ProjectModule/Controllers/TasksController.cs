@@ -17,6 +17,8 @@ namespace ProjectModule.Controllers
         private ProjectModuleDBEntities db = new ProjectModuleDBEntities();
 
         // GET: api/Tasks
+        [HttpGet]
+        [Route("api/tasks")]
         public IHttpActionResult GetTask()
         {
             return Json(db.Task);
@@ -24,6 +26,7 @@ namespace ProjectModule.Controllers
 
         // GET: api/Tasks/5
         [HttpGet]
+        [Route("api/tasks/{id}")]
         public IHttpActionResult GetTask(long id)
         {
             Task task = db.Task.Find(id);
@@ -35,9 +38,43 @@ namespace ProjectModule.Controllers
             return Json(task);
         }
 
+        //        // PUT: api/Tasks/5
+        //        public IHttpActionResult PutTask(long id, Task task)
+        //        {
+        //            if (!ModelState.IsValid)
+        //            {
+        //                return BadRequest(ModelState);
+        //            }
+        //
+        //            if (id != task.Id)
+        //            {
+        //                return BadRequest();
+        //            }
+        //
+        //            db.Entry(task).State = EntityState.Modified;
+        //
+        //            try
+        //            {
+        //                db.SaveChanges();
+        //            }
+        //            catch (DbUpdateConcurrencyException)
+        //            {
+        //                if (!TaskExists(id))
+        //                {
+        //                    return NotFound();
+        //                }
+        //                else
+        //                {
+        //                    throw;
+        //                }
+        //            }
+        //
+        //            return StatusCode(HttpStatusCode.NoContent);
+        //        }
+
         // POST: api/tasks/set
-        [HttpPost]
-        [Route("api/tasks/set")]
+        [HttpPut]
+        [Route("api/tasks")]
         public IHttpActionResult SetTask(Task task)
         {
             if (!ModelState.IsValid)
@@ -59,8 +96,8 @@ namespace ProjectModule.Controllers
             return Json(db.Task.Find(task.Id));
         }
 
-        [HttpGet]
-        [Route("api/tasks/delete/{id}")]
+        [HttpDelete]
+        [Route("api/tasks/{id}")]
         public IHttpActionResult DeleteTask(long id)
         {
             Task task = db.Task.Find(id);
