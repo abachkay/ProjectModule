@@ -4,16 +4,11 @@
 <div id="mySidenav" class="sidenav">
     <a id="close" href="javascript:void(0)" class="closebtn">&times;</a>
     <h1>All tasks:</h1>
-    <a href="#">Task 1</a>
-    <a href="#">Task 2</a>
-    <a href="#">Task 3</a>
-    <a href="#">Task 4</a>
-    <a href="#">Task 5</a>
-    <a href="#">Task 6</a>
-    <a href="#">Task 7</a>
-    <a href="#">Task 8</a>
+    @for (int i = 0; i < ViewBag.Tasks.Count; i++)
+    {
+        <a href='@Url.Action("Index", "Home", new { taskId = ViewBag.Tasks[i].Id })'>@ViewBag.Tasks[i].Name</a>   
+    }
 </div>
-
         <div class="container-fluid" id="container">            
             <div class="row sp">
                 <div class="na col-md-2">
@@ -24,9 +19,8 @@
             <div class="row task" id="task">
                 <div class="col-md-2">
                     <p>Instructions</p>
-                     <p> line 14, create an sized heading called 'List of things I find just OK'.
-                        Starting on line 15, create an ordered list using the tag.
-                        Your ordered list should have three items, each wrapped (i.e. surrounded) by tags.
+                     <p> 
+                    @ViewBag.CurrentTask.Description
                     </p>
                 </div>  
 
@@ -99,7 +93,3 @@
 
    // closeNav();
 </script>
-       
-
-<div>task 1 result: @ViewBag.V1</div>
-<div>task 2 result: @ViewBag.V2</div>
