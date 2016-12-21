@@ -47,7 +47,33 @@
                             </div>
                         </div>
                     </div>
-
+                    <div style="background-color:white;border-radius:2px" class="row text-center">                        
+                        <button type="submit" id="sub" class="btn btn-primary btn-lg pull-left" style="margin:0px;border-radius:0px">
+                            <span class="glyphicon glyphicon-ok"></span> Submit
+                        </button>  
+                        <span>
+                        @if (ViewBag.TaskResult == "Correct")
+                        {
+                            <span>Правильно</span>
+                        }
+                        @if (ViewBag.TaskResult == "Incorrect")
+                        {
+                            <span>Неправильно</span>
+                        }
+                        </span>      
+                        @if (ViewBag.TaskResult == "Correct")
+                        {
+                            <button type="button" class="btn btn-info btn-lg pull-right" style="margin:0px;border-radius:0px" onclick="location.href='@Url.Action("NextTask", "Home", new { taskId = ViewBag.CurrentTask.Id })'">
+                                <span class="glyphicon glyphicon-circle-arrow-right"></span> Next
+                            </button>
+                        }
+                        else
+                        {
+                            <button type="button" class="btn btn-info btn-lg pull-right disabled" style="margin:0px;border-radius:0px">
+                                <span class="glyphicon glyphicon-circle-arrow-right"></span> Next
+                            </button>
+                        }
+                    </div>
                     
                     }
                 </div>
@@ -73,38 +99,6 @@
                         </div>
                     </div>
                 </div>           
-            </div>
-
-            <div class="row gr">
-                <div class="col-md-offset-2 col-md-1 su">
-                    <button type="submit" id="sub" class="btn btn-primary btn-lg">
-                        <span class="glyphicon glyphicon-ok"></span> Submit
-                    </button>
-                </div>
-                <div class="col-md-3 text-center">
-                    <div class="alert alert-success">
-                        <strong>Success test!</strong>
-                    </div>
-                </div>
-                 <div class="col-md-1 ar">
-                     <button type="button" class="btn btn-info btn-lg">
-                         <span class="glyphicon glyphicon-circle-arrow-right"></span> Next
-                     </button>
-                </div>          
-
-                            
-
-                        <!--<div class="alert alert-danger">
-                            <strong>Failed test!</strong>
-                        </div>-->
-
-
-                            <!--<button type="button" class="btn btn-info btn-lg" onclick="location.href='@Url.Action("NextTask", "Home", new { taskId = ViewBag.CurrentTask.Id })'">
-                                <span class="glyphicon glyphicon-circle-arrow-right"></span> Next question
-                            </button>-->
-
-                 
-                               
             </div>           
         </div>
        
