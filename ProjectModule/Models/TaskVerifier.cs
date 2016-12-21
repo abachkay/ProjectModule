@@ -48,13 +48,13 @@ namespace ProjectModule.Models
                 bool result = true;
                 switch (rule.Type)
                 {
-                    case 1:
+                    case (long)TaskType.XPathQuery:
                         result = VerifyXPathQueryResult(rule);
                         break;
-                    case 2:
+                    case (long)TaskType.XPathElementStyle:
                         result = VerifyElementStyle(rule);
                         break;
-                    case 3:
+                    case (long)TaskType.XPathElementAttributes:
                         result = VerifyElementAttributes(rule);
                         break;
                     default:
