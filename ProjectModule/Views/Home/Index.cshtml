@@ -26,6 +26,8 @@
 
                 <div class="ma col-md-5 text-center">
                     <!---- <textarea name="" id="e_sex" cols="30" rows="10" placeholder="Write code here..."></textarea> -->
+                    @using (Html.BeginForm("Verify", "Home", new { taskId = ViewBag.CurrentTask.Id }, FormMethod.Post))
+                    {
                     <div id="tab">
                         <ul class="nav nav-pills">
                             <li class="active">
@@ -38,21 +40,28 @@
 
                         <div class="tab-content clearfix">
                             <div class="tab-pane active" id="html">
-                                <textarea id="code" cols="10" rows="10"></textarea>
+                                <textarea name="htmlCode" id="code" cols="10" rows="10">@if (ViewBag.PreviousHtmlCode != null) {@ViewBag.PreviousHtmlCode}</textarea>
                             </div>
                             <div class="tab-pane" id="css">
-                                <textarea id="css" cols="30" rows="10"></textarea>
+                                <textarea name="cssCode" id="css" cols="30" rows="10">@if (ViewBag.PreviousCssCode != null){@ViewBag.PreviousCssCode}</textarea>
                             </div>
                         </div>
                     </div>
                     <div class="btn-group">
-                        <button type="button" id="sub" class="btn btn-primary btn-lg">
+                        <button type="submit" id="sub" class="btn btn-primary btn-lg">
                             <span class="glyphicon glyphicon-ok"></span> Submit
                         </button>
                         <button type="button" class="btn btn-warning btn-lg">
                             <span class="glyphicon glyphicon-refresh"></span> Reset
                         </button>
+@if (ViewBag.TaskResult == "Correct")
+{
+                        <button type="button" class="btn btn-info btn-lg">
+                            <span class="glyphicon glyphicon-circle-arrow-right"></span> Next question
+                        </button>
+}
                     </div>
+                    }
                 </div>
 
                 <div class="col-md-5">
@@ -77,10 +86,23 @@
                     </div>
                 </div>           
             </div>
-            @if (ViewBag.TaskResult != null)
-            {
-               <div class="text-center">@ViewBag.TaskResult</div>
-            }
+
+            <div class="row">
+                <div class="col-md-offset-3 col-md-3 text-center">
+@if (ViewBag.TaskResult == "Correct")
+{
+                    <div class="alert alert-success">
+                        <strong>Success test!</strong>
+                    </div>
+}
+@if (ViewBag.TaskResult == "Incorrect")
+{
+                    <div class="alert alert-danger">
+                        <strong>Failed test!</strong>
+                    </div>
+}
+                </div>               
+            </div>           
         </div>
        
 <script>

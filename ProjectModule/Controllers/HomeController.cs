@@ -30,9 +30,41 @@ namespace ProjectModule.Controllers
                 ViewBag.Tasks = db.Task.ToList();
                 var task=db.Task.ToList().Where(x=>x.Id==taskId).FirstOrDefault();
                 ViewBag.CurrentTask = (task == null ?db.Task.FirstOrDefault():task);
-                ViewBag.TaskResult = "Правильно";                
+
+               if (TempData["TaskResult"] != null)
+                {
+                    if (TempData["TaskResult"].ToString() == "Correct")
+                        ViewBag.TaskResult = "Correct";
+                    else
+                        ViewBag.TaskResult = "Incorrect";
+                }
+
+                if (TempData["PreviousHtmlCode"] != null)
+                    ViewBag.PreviousHtmlCode = TempData["PreviousHtmlCode"];
+                if (TempData["PreviousCssCode"] != null)
+                    ViewBag.PreviousCssCode = TempData["PreviousCssCode"];
+
             }
             return View();
+        }
+        [HttpPost]
+        [ValidateInput(false)]
+        public ActionResult Verify(int taskId,string htmlCode, string cssCode)
+        {
+            using (var db = new ProjectModuleDBEntities())
+            {
+                var task = db.Task.Where(x => x.Id == taskId).FirstOrDefault();
+                if (task != null)
+                {
+                    TempData["PreviousHtmlCode"] = htmlCode;
+                    TempData["PreviousCssCode"] = cssCode;
+                    if (new TaskVerifier(task, htmlCode, cssCode).Verify())
+                        TempData["TaskResult"] = "Correct";
+                    else
+                        TempData["TaskResult"] = "Incorrect";                    
+                }
+            }                            
+            return RedirectToAction("Index", new { taskId=taskId});
         }
     }
 }
