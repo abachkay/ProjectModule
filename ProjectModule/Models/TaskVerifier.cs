@@ -9,6 +9,14 @@ using System.Xml.XPath;
 
 namespace ProjectModule.Models
 {
+    public enum TaskType
+    {
+        XPathPresent = 0,
+        XPathQuery = 1,
+        XPathElementStyle = 2,
+        XPathElementAttribures = 3
+    }
+
     public class TaskVerifier
     {
         private readonly Task _task;

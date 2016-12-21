@@ -14,24 +14,73 @@ namespace ProjectModule.Models.Tests
         [TestMethod()]
         public void VerifyXPathQueryResultTest()
         {
-            using (var db = new ProjectModuleDBEntities())
+            var html = "<a href='google.com'></a>";
+            var css = "";
+            Task task = new Task()
             {
-                var html = "<a></a>";
-                var css = "";
-                Assert.IsTrue(new TaskVerifier(db.Task.FirstOrDefault(), html, css).Verify());
-            }                
+                Id = 1,
+                Description = "Bla-blah",
+                Name = "sgfh",
+                Rule = new List<Rule>()
+                {
+                    new Rule()
+                    {
+                        Id = 1, Selector = "//a/@href", Task = null,
+                        TaskId = 1, Type = (long)TaskType.XPathQuery,
+                        Value = "'google.com'"
+                    }
+                }
+            };
+            Assert.IsTrue(new TaskVerifier(task, html, css).Verify());
         }
 
         [TestMethod()]
         public void VerifyXPathPresentTest()
         {
-            Assert.Fail();
+            var html = "<html><a></a></html>";
+            var css = "";
+            Task task = new Task()
+            {
+                Id = 1,
+                Description = "Bla-blah",
+                Name = "sgfh",
+                Rule = new List<Rule>()
+                {
+                    new Rule()
+                    {
+                        Id = 1, Selector = "//a", Task = null,
+                        TaskId = 1, Type = (long)TaskType.XPathPresent,
+                    }
+                }
+            };
+            Assert.IsTrue(new TaskVerifier(task, html, css).Verify());
         }
 
         [TestMethod()]
         public void VerifyElementStyleTest()
         {
-            Assert.Fail();
+            var html = 
+                @"<html> 
+                    <div class='a' id='a1'></div>
+                    <div class='b'></div>
+                </html>";
+            var css = ".a{color:red}";
+            Task task = new Task()
+            {
+                Id = 1,
+                Description = "Bla-blah",
+                Name = "sgfh",
+                Rule = new List<Rule>()
+                {
+                    new Rule()
+                    {
+                        Id = 1, Selector = "//div[@id='a1']", Task = null,
+                        TaskId = 1, Type = (long)TaskType.XPathElementStyle,
+                        Value = "color:red"
+                    }
+                }
+            };
+            Assert.IsTrue(new TaskVerifier(task, html, css).Verify());
         }
     }
 }

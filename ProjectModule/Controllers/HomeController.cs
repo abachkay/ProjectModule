@@ -15,8 +15,8 @@ namespace ProjectModule.Controllers
             {
                 var html = "<a href='google.com'></a>";
                 var css = "";
-                ViewBag.V1=new TaskVerifier(db.Task.FirstOrDefault(), html, css).Verify().ToString();
-                ViewBag.V2 = new TaskVerifier(db.Task.ToList().ElementAt(1), html, css).Verify().ToString();
+                ViewBag.V1 = new TaskVerifier(db.Task.FirstOrDefault(), html, css).Verify().ToString();
+                ViewBag.V2 = new TaskVerifier(db.Task.ToList()[1], html, css).Verify().ToString();
             }
             return View();
         }        
