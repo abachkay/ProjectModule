@@ -93,11 +93,16 @@
 
                 <div class="tab-content clearfix">
                     <div class="tab-pane active" id="actual">
-                        <div id="actual">Actual result</div>
-                    </div>
-                    <div class="tab-pane" id="expect">
-                        <div id="expect">Expected result</div>
-                    </div>
+                        <div id="actual">
+                            @if (ViewBag.InlinedCode != null)
+                            {
+                                var str = new HtmlString(ViewBag.InlinedCode);
+                                <div class="section" id="contentContainer">
+                                    @str
+                                </div>                                
+                            }
+                        </div>
+                    </div>                   
                 </div>
             </div>
         </div>
