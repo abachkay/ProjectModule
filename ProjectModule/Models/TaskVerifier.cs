@@ -11,10 +11,9 @@ namespace ProjectModule.Models
 {
     public enum TaskType
     {
-        XPathPresent = 0,
         XPathQuery = 1,
         XPathElementStyle = 2,
-        XPathElementAttribures = 3
+        XPathElementAttributes = 3
     }
 
     public class TaskVerifier
@@ -50,9 +49,6 @@ namespace ProjectModule.Models
                 bool result = true;
                 switch (rule.Type)
                 {
-                    case 0:
-                        result = VerifyXPathPresent(rule);
-                        break;
                     case 1:
                         result = VerifyXPathQueryResult(rule);
                         break;
@@ -62,6 +58,8 @@ namespace ProjectModule.Models
                     case 3:
                         result = VerifyElementAttributes(rule);
                         break;
+                    default:
+                        throw new NotImplementedException();
                 }
                 if (!result)
                     return false;

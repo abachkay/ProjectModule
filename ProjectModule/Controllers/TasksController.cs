@@ -14,22 +14,20 @@ namespace ProjectModule.Controllers
 {
     public class TasksController : ApiController
     {
-        private ProjectModuleDBEntities db = new ProjectModuleDBEntities();
+        private readonly ProjectModuleDBEntities _db = new ProjectModuleDBEntities();
 
-        // GET: api/Tasks
         [HttpGet]
         [Route("api/tasks")]
         public IHttpActionResult GetTask()
         {
-            return Json(db.Task);
+            return Json(_db.Task); 
         }
 
-        // GET: api/Tasks/5
         [HttpGet]
         [Route("api/tasks/{id}")]
         public IHttpActionResult GetTask(long id)
         {
-            Task task = db.Task.Find(id);
+            Task task = _db.Task.Find(id);
             if (task == null)
             {
                 return NotFound();
@@ -72,7 +70,6 @@ namespace ProjectModule.Controllers
         //            return StatusCode(HttpStatusCode.NoContent);
         //        }
 
-        // POST: api/tasks/set
         [HttpPut]
         [Route("api/tasks")]
         public IHttpActionResult SetTask(Task task)
@@ -81,33 +78,33 @@ namespace ProjectModule.Controllers
             {
                 return BadRequest(ModelState);
             }
-            var old = db.Task.Find(task.Id);
+            var old = _db.Task.Find(task.Id);
             if (old == null)
             {
-                var newTask = (db.Task.Add(task));
-                db.SaveChanges();
+                var newTask = (_db.Task.Add(task));
+                _db.SaveChanges();
                 return Json(newTask);
             }
 
-            db.Entry(old).CurrentValues.SetValues(task);
+            _db.Entry(old).CurrentValues.SetValues(task);
 
-            db.SaveChanges();
+            _db.SaveChanges();
 
-            return Json(db.Task.Find(task.Id));
+            return Json(_db.Task.Find(task.Id));
         }
 
         [HttpDelete]
         [Route("api/tasks/{id}")]
         public IHttpActionResult DeleteTask(long id)
         {
-            Task task = db.Task.Find(id);
+            Task task = _db.Task.Find(id);
             if (task == null)
             {
                 return NotFound();
             }
 
-            db.Task.Remove(task);
-            db.SaveChanges();
+            _db.Task.Remove(task);
+            _db.SaveChanges();
 
             return Ok();
         }
@@ -116,14 +113,14 @@ namespace ProjectModule.Controllers
         {
             if (disposing)
             {
-                db.Dispose();
+                _db.Dispose();
             }
             base.Dispose(disposing);
         }
 
         private bool TaskExists(long id)
         {
-            return db.Task.Count(e => e.Id == id) > 0;
+            return _db.Task.Count(e => e.Id == id) > 0;
         }
     }
 }

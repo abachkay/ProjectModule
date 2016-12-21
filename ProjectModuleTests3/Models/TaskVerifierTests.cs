@@ -35,28 +35,6 @@ namespace ProjectModule.Models.Tests
         }
 
         [TestMethod()]
-        public void VerifyXPathPresentTest()
-        {
-            var html = "<html><a></a></html>";
-            var css = "";
-            Task task = new Task()
-            {
-                Id = 1,
-                Description = "Bla-blah",
-                Name = "sgfh",
-                Rule = new List<Rule>()
-                {
-                    new Rule()
-                    {
-                        Id = 1, Selector = "//a",
-                        TaskId = 1, Type = (long)TaskType.XPathPresent,
-                    }
-                }
-            };
-            Assert.IsTrue(new TaskVerifier(task, html, css).Verify());
-        }
-
-        [TestMethod()]
         public void VerifyElementStyleTest()
         {
             var html = 
