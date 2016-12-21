@@ -69,8 +69,33 @@ namespace ProjectModule.Models
         public bool VerifyXPathQueryResult(Rule rule)
         {         
             XPathNavigator navigator = _html.CreateNavigator();
-            var res = navigator.Evaluate(navigator.Compile(rule.Selector)).ToString();
-            return res== rule.Value;
+            //var res = navigator.Evaluate(navigator.Compile(rule.Selector)).ToString();
+            //return res== rule.Value;
+            var expr = navigator.Compile(rule.Selector);
+            object result = navigator.Evaluate(expr);
+            var str = result?.ToString();
+            if (result is bool)
+            {
+                // We’ll succeed if the result is true.
+                return (bool)result;
+            }
+            else if (result is double)
+            {
+                // We’ll succeed if the result is non-zero.
+                return ((double)result) != 0d;
+            }
+            else if (result is string)
+            {
+                // We’ll succeed if the result is non-empty.
+                return !String.IsNullOrEmpty((string)result);
+            }
+            else
+            {
+                // We’ll succeed if the result is non-empty.
+                XPathNodeIterator iterator = (XPathNodeIterator)result;
+                return iterator.MoveNext();
+            }
+
         }
 
         public bool VerifyXPathPresent(Rule rule)
