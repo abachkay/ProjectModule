@@ -56,7 +56,7 @@
                         </button>
 @if (ViewBag.TaskResult == "Correct")
 {
-                        <button type="button" class="btn btn-info btn-lg">
+                        <button type="button" class="btn btn-info btn-lg" onclick="location.href='@Url.Action("NextTask", "Home", new { taskId = ViewBag.CurrentTask.Id })'">
                             <span class="glyphicon glyphicon-circle-arrow-right"></span> Next question
                         </button>
 }
