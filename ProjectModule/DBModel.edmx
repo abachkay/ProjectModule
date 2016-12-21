@@ -57,7 +57,6 @@
           <Property Name="Selector" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
           <Property Name="Value" Type="String" MaxLength="10000" FixedLength="false" Unicode="true" />
           <Property Name="TaskId" Type="Int64" Nullable="false" />
-          <NavigationProperty Name="Task" Relationship="Self.FK_Rule_0_0" FromRole="Rule" ToRole="Task" />
         </EntityType>
         <EntityType Name="Task">
           <Key>

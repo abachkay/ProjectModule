@@ -19,7 +19,5 @@ namespace ProjectModule
         public string Selector { get; set; }
         public string Value { get; set; }
         public long TaskId { get; set; }
-    
-        public virtual Task Task { get; set; }
     }
 }

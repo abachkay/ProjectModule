@@ -1,33 +1,120 @@
 ﻿@{
     ViewBag.Title = "Home Page";
 }
-
-        @*<div class="col-md-5 task">
-
-                <textarea name="" id="" cols="30" rows="10" placeholder="Task text"></textarea>
-               
-            </div>
-            <div class="col-md-5 expect">
-            
-                <textarea name="" id="e_sex" cols="30" rows="10" placeholder="Actual result"></textarea>
-            </div>*@
-
-
-@*<div class="section center">
-    <button class="btn-floating light-blue waves-effect waves-light"><i class="material-icons">done</i></button>
-</div>
-<div class="section">
-    @foreach (var t in ViewBag.Tasks)
+<div id="mySidenav" class="sidenav">
+    <a id="close" href="javascript:void(0)" class="closebtn">&times;</a>
+    <h1>All tasks:</h1>
+    @for (int i = 0; i < ViewBag.Tasks.Count; i++)
     {
-        <div class="card-panel light-blue lighten-4">
-            <div class="center">Завдання:</div>
-            @t.Description
-            <div class="center">Очікуваний результат:</div>
-            @t.Answer
-        </div>
+        <a href='@Url.Action("Index", "Home", new { taskId = ViewBag.Tasks[i].Id })'>@ViewBag.Tasks[i].Name</a>
     }
-</div>*@
+</div>
+<div class="container-fluid" id="container">
+    <div class="row sp">
+        <div class="na col-md-2">
+            <span id="spa">&#9776; Tasks</span>
+        </div>
+    </div>
 
+    <div class="row task" id="task">
+        <div class="col-md-2">
+            <p>Instructions</p>
+            <p>
+                @ViewBag.CurrentTask.Description
+            </p>
+        </div>
 
-<div>task 1 result: @ViewBag.V1</div>
-<div>task 2 result: @ViewBag.V2</div>
+        <div class="ma col-md-5 text-center">
+            <!---- <textarea name="" id="e_sex" cols="30" rows="10" placeholder="Write code here..."></textarea> -->
+            @using (Html.BeginForm("Verify", "Home", new { taskId = ViewBag.CurrentTask.Id }, FormMethod.Post))
+            {
+                <div id="tab">
+                    <ul class="nav nav-pills">
+                        <li class="active">
+                            <a href="#html" data-toggle="tab">index.html</a>
+                        </li>
+                        <li>
+                            <a href="#css" data-toggle="tab">style.css</a>
+                        </li>
+                    </ul>
+
+                    <div class="tab-content clearfix">
+                        <div class="tab-pane active" id="html">
+                            <textarea name="htmlCode" id="code" cols="10" rows="10">@if (ViewBag.PreviousHtmlCode != null)
+                            {@ViewBag.PreviousHtmlCode}</textarea>
+                        </div>
+                        <div class="tab-pane" id="css">
+                            <textarea name="cssCode" id="css" cols="30" rows="10">@if (ViewBag.PreviousCssCode != null)
+                            {@ViewBag.PreviousCssCode}</textarea>
+                        </div>
+                    </div>
+                </div>
+                    <div style="background-color:white;border-radius:2px" class="row text-center">
+                        <button type="submit" id="sub" class="btn btn-primary btn-lg pull-left" style="margin:0px;border-radius:0px">
+                            <span class="glyphicon glyphicon-ok"></span> Submit
+                        </button>
+                        <span>
+                            @if (ViewBag.TaskResult == "Correct")
+                            {
+                                <span>Правильно</span>
+                            }
+                            @if (ViewBag.TaskResult == "Incorrect")
+                            {
+                                <span>Неправильно</span>
+                            }
+                        </span>
+                        @if (ViewBag.TaskResult == "Correct")
+                        {
+                            <button type="button" class="btn btn-info btn-lg pull-right" style="margin:0px;border-radius:0px" onclick="location.href='@Url.Action("NextTask", "Home", new { taskId = ViewBag.CurrentTask.Id })'">
+                                <span class="glyphicon glyphicon-circle-arrow-right"></span> Next
+                            </button>
+                        }
+                        else
+                        {
+                            <button type="button" class="btn btn-info btn-lg pull-right disabled" style="margin:0px;border-radius:0px">
+                                <span class="glyphicon glyphicon-circle-arrow-right"></span> Next
+                            </button>
+                        }
+                    </div>
+
+            }
+        </div>
+
+        <div class="col-md-5">
+            <div id="tab">
+                <ul class="nav nav-pills">
+                    <li class="active">
+                        <a href="#actual" data-toggle="tab">Actual result</a>
+                    </li>
+                    <li>
+                        <a href="#expect" data-toggle="tab">Expected result</a>
+                    </li>
+                </ul>
+
+                <div class="tab-content clearfix">
+                    <div class="tab-pane active" id="actual">
+                        <div id="actual">Actual result</div>
+                    </div>
+                    <div class="tab-pane" id="expect">
+                        <div id="expect">Expected result</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+   // function openNav() {
+     //   document.getElementById("mySidenav").style.display = "block";
+       // document.getElementById("container").style.opacity = "0.1";
+    //}
+
+    function closeNav() {
+        //document.getElementById("mySidenav").style.display = "none";
+        //document.getElementById("container").style.opacity = "1";
+
+    }
+
+   // closeNav();
+</script>

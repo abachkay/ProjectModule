@@ -20,18 +20,33 @@ namespace ProjectModule.Models.Tests
                 var css = "";
                 Assert.IsTrue(new TaskVerifier(db.Task.FirstOrDefault(), html, css).Verify());
             }                
-        }
-
-        [TestMethod()]
-        public void VerifyXPathPresentTest()
-        {
-            Assert.Fail();
-        }
+        }     
 
         [TestMethod()]
         public void VerifyElementStyleTest()
         {
-            Assert.Fail();
+            var html = 
+                @"<html> 
+                    <div class='a' id='a1'></div>
+                    <div class='b'></div>
+                </html>";
+            var css = ".a{color:red}";
+            Task task = new Task()
+            {
+                Id = 1,
+                Description = "Bla-blah",
+                Name = "sgfh",
+                Rule = new List<Rule>()
+                {
+                    new Rule()
+                    {
+                        Id = 1, Selector = "//div[@id='a1']",
+                        TaskId = 1, Type = (long)TaskType.XPathElementStyle,
+                        Value = "color:red"
+                    }
+                }
+            };
+            Assert.IsTrue(new TaskVerifier(task, html, css).Verify());
         }
     }
 }
