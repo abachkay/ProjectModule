@@ -3,5 +3,84 @@
     ViewBag.Title = "Administrator page";
 }
 
-<tinymce> abc</tinymce>
-<button class="btn btn-danger">Danger</button>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+           
+                <div class="list-group" title="TASKS" style="margin-top:80px; max-width:100%; min-width: 40%;">
+                    <a href="#" class="list-group-item disabled"><b>Tasks</b></a> 
+                    <a href="#" class="list-group-item">Task</a>
+                    <a href="#" class="list-group-item">Task</a>
+                    <a href="#" class="list-group-item">Task</a>
+                    <a href="#" class="list-group-item">Task</a>
+                    <a href="#" class="list-group-item">Task</a>
+                    <a href="#" class="list-group-item">Task</a>
+                    <a href="#" class="list-group-item">Task</a>
+                </div>
+
+                <button type="button" class="btn btn-danger center-block" name="create-task-button" style="border-radius: 50px">+</button>
+            </div>
+
+            <div class="col-md-9">
+                <div class="row" style="margin-top:25px;">
+                    <!-- Nested rows -->
+                    <div class="row">
+                        <h2 class="h3" style="text-align:center;">Task text</h2>
+                    </div>
+                    <!-- Text area for task text (instruction) -->
+                    <div class="col-lg-12">
+                        <textarea style="resize:none" class="form-control" rows="15" id="task_text"></textarea>
+                    </div>
+                </div>
+
+
+                <!-- Second row-->
+                <div class="row" style="margin-top:15px;">
+                    <!-- Create title for Rules -->
+                    <div class="row">
+                        <h2 class="h3" style="text-align:center;">Rules</h2>
+                    </div>
+
+                    <!-- CheckBox with rules type -->
+                    <div class="col-md-2">
+                        <select>
+                            <option value="Option">Option</option>
+                            <option value="Option">Option</option>
+                            <option value="Option">Option</option>
+                            <option value="Option">Option</option>
+                        </select>
+                    </div>
+
+                    <div class="col-md-4">
+                        <textarea style="resize:none" class="form-control" rows="1" id="link"></textarea>
+                    </div>
+
+                    <div class="col-md-4">
+                        <textarea style="resize:none" class="form-control" rows="1" id="link"></textarea>
+                    </div>
+
+                    <div class="col-md-1">
+                        <button type="button" name="add-parameter-button" class="btn btn-danger center-block" style="border-radius: 50px">-</button>
+                    </div>
+                </div>
+
+                <!-- Four row - Button add-->
+                <div class="row" style="margin-top:15px;">
+                    <div class="col-md-12 center-block">
+                        <button type="button" name="add-parameter-button" class="btn btn-danger center-block" style="border-radius: 50px">+</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>   
+    </div>
+
+
+    <div class="container-fluid" style="margin-top:15px;">
+        <div class="row text-center ma">
+            <div class="btn-group">
+                <button type="submit" name="save-task-button" class="btn btn-success btn-lg">Save</button>
+                <button type="button" name="delete-task-button" class="btn btn-danger btn-lg">Delete</button>
+            </div>
+        </div>
+    </div>
