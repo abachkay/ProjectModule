@@ -1,0 +1,9 @@
+diff a/.vs/config/applicationhost.config b/.vs/config/applicationhost.config	(rejected hunks)
+@@ -163,6 +163,7 @@
+             </site>
+             <site name="ProjectModule" id="2">
+                 <application path="/" applicationPool="Clr4IntegratedAppPool">
++<<<<<<< HEAD
+                     <virtualDirectory path="/" physicalPath="E:\навчання\ProjectModule\ProjectModule" />
+ =======
+                     <virtualDirectory path="/" physicalPath="F:\ProjectModule\ProjectModule" />

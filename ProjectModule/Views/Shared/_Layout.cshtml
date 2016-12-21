@@ -19,24 +19,7 @@
     </script>
 </head>
 <body>
-   
-   <nav>
-        <div class="main row">
-            <div class="col-md-2 text-center">
-                 <div class="navbar navbar-fixed-left">
-        @RenderBody()
-        
-                     <ul class="list-group">
-                        <li class="list-group-item"><a href="#">Home</a></li>
-                        <li  class="list-group-item"><a href="#">Exaple 1</a></li>
-                        <li  class="list-group-item"><a href="#">Exaple 2</a></li>
-                        <li  class="list-group-item"><a href="http://www.google.com" target="_blank">Exaple 3</a></li>
-                        <li  class="list-group-item"><a href="#">Exaple 4</a></li>
-                        <li  class="list-group-item"><a href="#">Exaple 5</a></li>
-                    </ul>
-                </div>
-            </div>
-   </nav>
+   @RenderBody()
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")    
@@ -67,7 +50,36 @@
             ]
         });
     </script>
+    <script>
 
+        $(document).ready(function(){
+            $("#spa").click(function () {
+
+                $("#mySidenav").fadeOut(100 , function () {
+                    $("#mySidenav").css("display", "block");
+                    $("#container").animate({ opacity: 0.1 }, 500);
+                    $("#container").css("pointer-events", "inherit");
+                    event.stopPropagation();
+                });
+               
+            });
+
+            $("#container").click(function () {             
+                    $("#mySidenav").css("display", "none");
+                    $("#container").animate({ opacity: 1 }, 500);
+                    $("#container").css("pointer-events", "auto");                               
+            });
+
+            $("#close").click(function () {
+                $("#mySidenav").fadeIn(1000, function () {
+                    $("#mySidenav").css("display", "none");
+                    $("#container").animate({ opacity: 1 }, 500);
+                    $("#container").css("pointer-events", "auto");
+                });                           
+            });
+        });
+        
+    </script>
     @RenderSection("scripts", required: false)   
 </body>
 </html>
