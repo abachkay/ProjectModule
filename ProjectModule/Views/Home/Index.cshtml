@@ -1,6 +1,26 @@
 ﻿@{
     ViewBag.Title = "Home Page";
 }
+<script>
+    function renderReslut() {
+        var text = document.getElementById("code").value;
+        var ifr = document.createElement("iframe");
+        ifr.setAttribute("frameborder", "0");
+        ifr.setAttribute("id", "iframeResult");
+        ifr.setAttribute("name", "iframeResult");
+        var wrapper = document.getElementById("wrapper-actual");
+        while (wrapper.firstChild) {
+            wrapper.removeChild(wrapper.firstChild);
+        }
+
+        wrapper.appendChild(ifr);
+        var ifrw = (ifr.contentWindow) ? ifr.contentWindow : (ifr.contentDocument.document) ? ifr.contentDocument.document : ifr.contentDocument;
+        ifrw.document.open();
+        ifrw.document.write(text);
+        ifrw.document.close();
+    }
+</script>
+
 <div id="mySidenav" class="sidenav">
     <a id="close" href="javascript:void(0)" class="closebtn">&times;</a>
     <h1>All tasks:</h1>
@@ -40,8 +60,12 @@
 
                     <div class="tab-content clearfix">
                         <div class="tab-pane active" id="html">
-                            <textarea name="htmlCode" id="code" cols="10" rows="10">@if (ViewBag.PreviousHtmlCode != null)
-                            {@ViewBag.PreviousHtmlCode}</textarea>
+                            <textarea name="htmlCode" id="code" cols="10" rows="10" onchange="renderReslut()">
+                                @if (ViewBag.PreviousHtmlCode != null)
+                                {
+                                    @ViewBag.PreviousHtmlCode
+                                }
+                            </textarea>
                         </div>
                         <div class="tab-pane" id="css">
                             <textarea name="cssCode" id="css" cols="30" rows="10">@if (ViewBag.PreviousCssCode != null)
@@ -93,10 +117,12 @@
 
                 <div class="tab-content clearfix">
                     <div class="tab-pane active" id="actual">
-                        <div id="actual">Actual result</div>
+                        <div id="wrapper-actual">
+                            
+                        </div>
                     </div>
                     <div class="tab-pane" id="expect">
-                        <div id="expect">Expected result</div>
+                        <div id="wrapper-expected">Expected result</div>
                     </div>
                 </div>
             </div>
@@ -105,9 +131,9 @@
 </div>
 
 <script>
-   // function openNav() {
-     //   document.getElementById("mySidenav").style.display = "block";
-       // document.getElementById("container").style.opacity = "0.1";
+    // function openNav() {
+    //   document.getElementById("mySidenav").style.display = "block";
+    // document.getElementById("container").style.opacity = "0.1";
     //}
 
     function closeNav() {
@@ -116,5 +142,6 @@
 
     }
 
-   // closeNav();
+    // closeNav();
+
 </script>
