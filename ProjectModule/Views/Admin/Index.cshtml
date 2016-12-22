@@ -81,14 +81,14 @@
 
         function createRuleTypeDropdown() {
             return $('<div></div>').addClass("dropdown")
-                .append($('<button></button>').addClass("btn-default dropdown-toggle").attr("type", "button").attr("id", "menu1")
-                    .attr("data-toggle", "dropdown").html('Add<span class="caret"></span>')
+                .append($('<button></button>').addClass("btn btn-default dropdown-toggle").attr("type", "button").attr("style", "width:100%").attr("id", "menu1").attr("data-toggle", "dropdown")
+                    .html('Add<span class="caret"></span>'))
                 .append($('<ul></ul>').addClass("dropdown-menu").attr("role", "menu").attr("aria-labelledby", "menu1")
-                    .html('<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Test_1</a></li>')));
+                    .html('<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Test_1</a></li>'));
         }
         function createRule(rule) {
-            var ruleDiv = $('<div></div>').addClass("rule")
-                .append($('<div></div>').addClass("col-md-2")
+            var ruleDiv = $('<div></div>').addClass("rule row")
+                .append($('<div></div>').addClass("col-md-3")
                     .append(createRuleTypeDropdown()))
                 .append($('<div></div>').addClass("col-md-4")
                         .append($('<textarea></textarea>').addClass("form-control").attr("style", "resize:none").attr("rows", "1").attr("id", "link")
@@ -96,9 +96,9 @@
                 .append($('<div></div>').addClass("col-md-4")
                         .append($('<textarea></textarea>').addClass("form-control").attr("style", "resize:none").attr("rows", "1").attr("id", "link")
                             .val(rule.Value)))
-                .append($('<div></div>').addClass("col-md-1"))
-                .append($('<button></button>').attr("type", "button").addClass("btn btn-danger").attr("name", "add-parameter-button").attr("style", "height:35px")
-                    .append($('<span></span>').addClass("glyphicon glyphicon-plus")));
+                .append($('<div></div>').addClass("col-md-1")
+                    .append($('<button></button>').attr("type", "button").addClass("btn btn-danger pull-right").attr("name", "add-parameter-button").attr("style", "height:35px")
+                        .append($('<span></span>').addClass("glyphicon glyphicon-plus"))));
 
             return ruleDiv;
         }
