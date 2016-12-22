@@ -9,6 +9,8 @@
         if (!htmlText)
             return;
         var ifr = document.createElement("iframe");
+        ifr.height = '100%';
+        ifr.width = '100%';
         ifr.setAttribute("frameborder", "0");
         ifr.setAttribute("id", "iframeResult");
         ifr.setAttribute("name", "iframeResult");
@@ -110,13 +112,13 @@
                             @if (ViewBag.TaskResult == "Correct")
                             {
                                 <button type="button" class="panel-body btn btn-info btn-lg" style="width:100%;border-radius:0;" onclick="location.href='@Url.Action("NextTask", "Home", new { taskId = ViewBag.CurrentTask.Id })'">
-                                    Далі<span class="glyphicon glyphicon-circle-arrow-right"></span> 
+                                    Далі <span class="glyphicon glyphicon-circle-arrow-right"></span> 
                                 </button>
                             }
                             else
                             {
                                 <button type="button" class="panel-body btn btn-info btn-lg pull-right disabled" style="width:100%;border-radius:0;" onclick="renderReslut()">
-                                    Далі<span class="glyphicon glyphicon-circle-arrow-right"></span>
+                                    Далі <span class="glyphicon glyphicon-circle-arrow-right"></span>
                                 </button>
                             }
                         </div>
@@ -132,12 +134,7 @@
                         <a href="#actual" data-toggle="tab">Результат</a>
                     </li>                    
                 </ul>
-
-                <div class="tab-content clearfix" style="height:510px;background-color:white;">
-                    <div class="tab-pane active" id="actual">
-                        <div id="wrapper-actual"> </div>
-                    </div>                   
-                </div>
+                <div class="tab-content clearfix" id="wrapper-actual" style="height:510px;background-color:white;"> </div>
             </div>
         </div>
     </div>
