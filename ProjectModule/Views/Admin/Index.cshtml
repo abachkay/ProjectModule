@@ -2,19 +2,20 @@
 @{
     ViewBag.Title = "Administrator page";
 }
+
 <div class="container">
     <div class="row">
         <div class="col-md-3">
 
-            <div class="list-group" title="TASKS" style="margin-top:80px; max-width:100%; min-width: 40%;">
-                <a href="#" class="list-group-item disabled"><b>Tasks</b></a>
-                <a href="#" class="list-group-item">Task</a>
-                <a href="#" class="list-group-item">Task</a>
-                <a href="#" class="list-group-item">Task</a>
-                <a href="#" class="list-group-item">Task</a>
-                <a href="#" class="list-group-item">Task</a>
-                <a href="#" class="list-group-item">Task</a>
-                <a href="#" class="list-group-item">Task</a>
+            <div class="list-group" title="TASKS" id="taskList" style="margin-top:80px; max-width:100%; min-width: 40%;">
+@*                <a href="#" class="list-group-item disabled"><b>Tasks</b></a>*@
+@*                <a href="#" class="list-group-item">Task</a>*@
+@*                <a href="#" class="list-group-item">Task</a>*@
+@*                <a href="#" class="list-group-item">Task</a>*@
+@*                <a href="#" class="list-group-item">Task</a>*@
+@*                <a href="#" class="list-group-item">Task</a>*@
+@*                <a href="#" class="list-group-item">Task</a>*@
+@*                <a href="#" class="list-group-item">Task</a>*@
             </div>
             <button type="button" class="btn btn-danger center-block" name="create-task-button" style="border-radius: 50px">+</button>
         </div>
@@ -65,7 +66,7 @@
     </div>
 </div>
 
-<div class="container-fluid" style="margin-top:15px;">
+<div class="container-fluid" style="margin-top: 15px;">
     <div class="row text-center ma">
         <div class="btn-group">
             <button type="submit" name="save-task-button" class="btn btn-success btn-lg">Save</button>
@@ -73,3 +74,36 @@
         </div>
     </div>
 </div>
+@section scripts {
+    <script>
+        var uri = '/api/tasks';
+
+        $(document).ready(function() {
+            // Send an AJAX request
+            $.getJSON(uri)
+                .done(function(data) {
+                    // On success, 'data' contains a list of products.
+                    $.each(data, function(key, item) {
+                        // Add a list item for the product.
+                        $('<a></a>').attr("href", "#").attr("class", "list-group-item")
+                            .html(item.Name).appendTo($('#taskList'));
+                    });
+                });
+        });
+
+        function formatItem(item) {
+            return item.Name;
+        }
+
+//    function find() {
+//      var id = $('#prodId').val();
+//      $.getJSON(uri + '/' + id)
+//          .done(function (data) {
+//            $('#product').text(formatItem(data));
+//          })
+//          .fail(function (jqXHR, textStatus, err) {
+//            $('#product').text('Error: ' + err);
+//          });
+//    }
+    </script>
+}
