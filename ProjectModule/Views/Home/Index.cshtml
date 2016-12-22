@@ -28,7 +28,7 @@
 
 <div id="mySidenav" class="sidenav">
     <a id="close" href="javascript:void(0)" class="closebtn">&times;</a>
-    <h1>All tasks:</h1>
+    <h1>Завдання:</h1>
     @for (int i = 0; i < ViewBag.Tasks.Count; i++)
     {
         <a href='@Url.Action("Index", "Home", new { taskId = ViewBag.Tasks[i].Id })'>@ViewBag.Tasks[i].Name</a>
@@ -37,13 +37,13 @@
 <div class="container-fluid" id="container">
     <div class="row sp">
         <div class="na col-md-2">
-            <span id="spa">&#9776; Tasks</span>
+            <span id="spa">&#9776; Завдання</span>
         </div>
     </div>
 
     <div class="row task" id="task">
         <div class="col-md-2">
-            <p>Instructions</p>
+            <p>Інструкції</p>
             <p>
                 @ViewBag.CurrentTask.Description
             </p>
@@ -73,32 +73,32 @@
                 </div>
                 <div style="background-color:white">
                     <div class="row">
-                        <div class="col-md-4 col-lg-3">                            
+                        <div class="col-md-4 col-lg-4">                            
                             <button type="submit" id="sub" class="panel-body btn btn-primary btn-lg" style="width:100%;border-radius:0;">
-                                <span class="glyphicon glyphicon-ok"></span> Submit
+                                <span class="glyphicon glyphicon-ok"></span> Перевірити
                             </button>
                         </div>
-                        <div class="col-md-4 col-lg-6 text-center" style="margin-top:15px;margin-bottom:15px">                            
+                        <div class="col-md-4 col-lg-4 text-center" style="margin-top:15px;margin-bottom:15px">                            
                             @if (ViewBag.TaskResult == "Correct")
                             {
-                                <span class="text-success">Правильно</span>
+                                <span class="text-success">Правильно!</span>
                             }
                             @if (ViewBag.TaskResult == "Incorrect")
                             {
-                                <span class="text-danger">Неправильно</span>
+                                <span class="text-danger">Неправильно(</span>
                             }                            
                         </div>
-                        <div class="col-md-4 col-lg-3">                  
+                        <div class="col-md-4 col-lg-4">                  
                             @if (ViewBag.TaskResult == "Correct")
                             {
                                 <button type="button" class="panel-body btn btn-info btn-lg" style="width:100%;border-radius:0;" onclick="location.href='@Url.Action("NextTask", "Home", new { taskId = ViewBag.CurrentTask.Id })'">
-                                    <span class="glyphicon glyphicon-circle-arrow-right"></span> Next
+                                    Далі<span class="glyphicon glyphicon-circle-arrow-right"></span> 
                                 </button>
                             }
                             else
                             {
                                 <button type="button" class="panel-body btn btn-info btn-lg pull-right disabled" style="width:100%;border-radius:0;">
-                                    <span class="glyphicon glyphicon-circle-arrow-right"></span> Next
+                                    Далі<span class="glyphicon glyphicon-circle-arrow-right"></span>
                                 </button>
                             }
                         </div>
@@ -111,28 +111,14 @@
             <div id="tab">
                 <ul class="nav nav-pills">
                     <li class="active">
-                        <a href="#actual" data-toggle="tab">Actual result</a>
-                    </li>
-                    <li>
-                        <a href="#expect" data-toggle="tab">Expected result</a>
-                    </li>
+                        <a href="#actual" data-toggle="tab">Результат</a>
+                    </li>                    
                 </ul>
 
                 <div class="tab-content clearfix" style="height:510px;background-color:white;">
                     <div class="tab-pane active" id="actual">
-                        <div id="wrapper-actual">
-@*                            @if (ViewBag.InlinedCode != null)*@
-@*                            {*@
-@*                                var str = new HtmlString(ViewBag.InlinedCode);*@
-@*                                <div class="section" id="contentContainer">*@
-@*                                    @str*@
-@*                                </div>*@
-@*                            }*@
-                        </div>
-                    </div>
-                    <div class="tab-pane" id="expect">
-                        <div id="wrapper-expected">Expected result</div>
-                    </div>
+                        <div id="wrapper-actual"> </div>
+                    </div>                   
                 </div>
             </div>
         </div>
