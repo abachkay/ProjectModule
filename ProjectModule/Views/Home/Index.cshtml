@@ -49,8 +49,7 @@
             </p>
         </div>
 
-        <div class="ma col-md-5 text-center">
-            <!---- <textarea name="" id="e_sex" cols="30" rows="10" placeholder="Write code here..."></textarea> -->
+        <div class="ma col-md-5 text-center">          
             @using (Html.BeginForm("Verify", "Home", new { taskId = ViewBag.CurrentTask.Id }, FormMethod.Post))
             {
                 <div id="tab">
@@ -65,51 +64,46 @@
 
                     <div class="tab-content clearfix">
                         <div class="tab-pane active" id="html">
-                            <textarea name="htmlCode" id="htmlText" cols="10" rows="10" onchange="renderReslut()">
-                                @if (ViewBag.PreviousHtmlCode != null)
-                                {
-                                    @ViewBag.PreviousHtmlCode
-                                }
-                            </textarea>
+                            <textarea name="htmlCode" id="htmlText" cols="10" rows="10" onchange="renderReslut()">@if (ViewBag.PreviousHtmlCode != null){@ViewBag.PreviousHtmlCode}</textarea>
                         </div>
                         <div class="tab-pane" id="css">
-                            <textarea name="cssCode" id="cssText" cols="30" rows="10" onchange="renderReslut()">
-                                @if (ViewBag.PreviousCssCode != null)
-                                {
-                                    @ViewBag.PreviousCssCode
-                                }
-                            </textarea>
+                            <textarea name="cssCode" id="cssText" cols="30" rows="10" onchange="renderReslut()">@if (ViewBag.PreviousCssCode != null){@ViewBag.PreviousCssCode}</textarea>
                         </div>
                     </div>
                 </div>
-                    <div style="background-color:white;border-radius:2px" class="row text-center">
-                        <button type="submit" id="sub" class="btn btn-primary btn-lg pull-left" style="margin:0px;border-radius:0px">
-                            <span class="glyphicon glyphicon-ok"></span> Submit
-                        </button>
-                        <span>
+                <div style="background-color:white">
+                    <div class="row">
+                        <div class="col-md-4 col-lg-3">                            
+                            <button type="submit" id="sub" class="panel-body btn btn-primary btn-lg" style="width:100%;border-radius:0;">
+                                <span class="glyphicon glyphicon-ok"></span> Submit
+                            </button>
+                        </div>
+                        <div class="col-md-4 col-lg-6 text-center" style="margin-top:15px;margin-bottom:15px">                            
                             @if (ViewBag.TaskResult == "Correct")
                             {
-                                <span>Правильно</span>
+                                <span class="text-success">Правильно</span>
                             }
                             @if (ViewBag.TaskResult == "Incorrect")
                             {
-                                <span>Неправильно</span>
+                                <span class="text-danger">Неправильно</span>
+                            }                            
+                        </div>
+                        <div class="col-md-4 col-lg-3">                  
+                            @if (ViewBag.TaskResult == "Correct")
+                            {
+                                <button type="button" class="panel-body btn btn-info btn-lg" style="width:100%;border-radius:0;" onclick="location.href='@Url.Action("NextTask", "Home", new { taskId = ViewBag.CurrentTask.Id })'">
+                                    <span class="glyphicon glyphicon-circle-arrow-right"></span> Next
+                                </button>
                             }
-                        </span>
-                        @if (ViewBag.TaskResult == "Correct")
-                        {
-                            <button type="button" class="btn btn-info btn-lg pull-right" style="margin:0px;border-radius:0px" onclick="location.href='@Url.Action("NextTask", "Home", new { taskId = ViewBag.CurrentTask.Id })'">
-                                <span class="glyphicon glyphicon-circle-arrow-right"></span> Next
-                            </button>
-                        }
-                        else
-                        {
-                            <button type="button" class="btn btn-info btn-lg pull-right disabled" style="margin:0px;border-radius:0px">
-                                <span class="glyphicon glyphicon-circle-arrow-right"></span> Next
-                            </button>
-                        }
+                            else
+                            {
+                                <button type="button" class="panel-body btn btn-info btn-lg pull-right disabled" style="width:100%;border-radius:0;">
+                                    <span class="glyphicon glyphicon-circle-arrow-right"></span> Next
+                                </button>
+                            }
+                        </div>
                     </div>
-
+                </div>               
             }
         </div>
 
@@ -144,19 +138,3 @@
         </div>
     </div>
 </div>
-
-<script>
-    // function openNav() {
-    //   document.getElementById("mySidenav").style.display = "block";
-    // document.getElementById("container").style.opacity = "0.1";
-    //}
-
-    function closeNav() {
-        //document.getElementById("mySidenav").style.display = "none";
-        //document.getElementById("container").style.opacity = "1";
-
-    }
-
-    // closeNav();
-
-</script>
