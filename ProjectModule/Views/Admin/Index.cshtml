@@ -9,13 +9,6 @@
 
             <div class="list-group" title="TASKS" id="taskList" style="margin-top:80px; max-width:100%; min-width: 40%;">
                 <a href="#" class="list-group-item disabled"><b>Tasks</b></a>
-@*                <a href="#" class="list-group-item">Task</a>*@
-@*                <a href="#" class="list-group-item">Task</a>*@
-@*                <a href="#" class="list-group-item">Task</a>*@
-@*                <a href="#" class="list-group-item">Task</a>*@
-@*                <a href="#" class="list-group-item">Task</a>*@
-@*                <a href="#" class="list-group-item">Task</a>*@
-@*                <a href="#" class="list-group-item">Task</a>*@
             </div>
             <button type="button" class="btn btn-danger center-block add_btn" onclick="addTask()" name="create-task-button">
                 <span class="glyphicon glyphicon-plus"></span>
@@ -40,30 +33,34 @@
                     <h2 class="h3" style="text-align:center;">Rules</h2>
                 </div>
                 <!-- CheckBox with rules type -->
-                <div class="col-md-2">
-                    <div class="dropdown">
-                        <button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">
-                            Add
-                            <span class="caret"></span>
-                        </button>
-                        <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
-                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Test_1</a></li>
-                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Test_2</a></li>
-                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Test_3</a></li>                            
-                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Test_4</a></li>
-                        </ul>
+                <div id="rule_list">
+                    <div class="rule">
+                        <div class="col-md-2">
+                            <div class="dropdown">
+                                <button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">
+                                    Add
+                                    <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
+                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Test_1</a></li>
+                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Test_2</a></li>
+                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Test_3</a></li>
+                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Test_4</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <textarea style="resize:none" class="form-control" rows="1" id="link"></textarea>
+                        </div>
+                        <div class="col-md-4">
+                            <textarea style="resize: none" class="form-control" rows="1" id="link"></textarea>
+                        </div>
+                        <div class="col-md-1">
+                            <button type="button" name="add-parameter-button" class="btn btn-danger" style="height: 35px;">
+                                <span class="glyphicon glyphicon-minus"></span>
+                            </button>
+                        </div>
                     </div>
-                </div>
-                <div class="col-md-4">
-                    <textarea style="resize:none" class="form-control" rows="1" id="link"></textarea>
-                </div>
-                <div class="col-md-4">
-                    <textarea style="resize:none" class="form-control" rows="1" id="link"></textarea>
-                </div>
-                <div class="col-md-1">
-                    <button type="button" name="add-parameter-button" class="btn btn-danger" style="height:35px;">
-                        <span class="glyphicon glyphicon-minus"></span>
-                    </button>
                 </div>
             </div>
             <!-- Four row - Button add-->
@@ -91,10 +88,35 @@
     <script>
         var uri = '/api/tasks/';
 
+        function createRuleTypeDropdown() {
+            return $('<div></div>').addClass("dropdown")
+                .append($('<button></button>').addClass("btn-default dropdown-toggle").attr("type", "button").attr("id", "menu1")
+                    .attr("data-toggle", "dropdown").html('Add<span class="caret"></span>')
+                .append($('<ul></ul>').addClass("dropdown-menu").attr("role", "menu").attr("aria-labelledby", "menu1")
+                    .html('<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Test_1</a></li>')));
+        }
+        function createRule(rule) {
+            var ruleDiv = $('<div></div>').addClass("rule")
+                .append($('<div></div>').addClass("col-md-2")
+                    .append(createRuleTypeDropdown()))
+                .append($('<div></div>').addClass("col-md-4")
+                        .append($('<textarea></textarea>').addClass("form-control").attr("style", "resize:none").attr("rows", "1").attr("id", "link")))
+                .append($('<div></div>').addClass("col-md-4")
+                        .append($('<textarea></textarea>').addClass("form-control").attr("style", "resize:none").attr("rows", "1").attr("id", "link")))
+                .append($('<div></div>').addClass("col-md-1"))
+                .append($('<button></button>').attr("type", "button").addClass("btn btn-danger").attr("name", "add-parameter-button").attr("style", "height:35px")
+                    .append($('<span></span>').addClass("glyphicon glyphicon-plus")));
+
+            return ruleDiv;
+        }
         function displayTask(id) {
             $.getJSON(uri.concat(id))
                 .done(function (task) {
                     $('#task_text').val(task.Description);
+                    $('#rule_list').empty();
+                    $.each(task.Rule, function(key, rule) {
+                        $('#rule_list').append(createRule(rule));
+                    });
                 });
         }
 
@@ -128,16 +150,5 @@
         function formatItem(item) {
             return item.Name;
         }
-        
-//    function find() {
-//      var id = $('#prodId').val();
-//      $.getJSON(uri + '/' + id)
-//          .done(function (data) {
-//            $('#product').text(formatItem(data));
-//          })
-//          .fail(function (jqXHR, textStatus, err) {
-//            $('#product').text('Error: ' + err);
-//          });
-//    }
     </script>
 }
