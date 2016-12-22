@@ -4,84 +4,75 @@
 }
 
 <div class="container">
-    <div class="row">
+    <div class="row" style="margin-top:15px">
         <div class="col-md-3">
 
-            <div class="list-group" title="TASKS" id="taskList" style="margin-top:80px; max-width:100%; min-width: 40%;">
+            <div class="list-group" title="TASKS" id="taskList">
                 <a href="#" class="list-group-item disabled"><b>Tasks</b></a>
             </div>
-            <button type="button" class="btn btn-danger center-block add_btn" onclick="addTask()" name="create-task-button">
+            <button type="button" class="btn btn-success btn-circle center-block add_btn" onclick="addTask()" name="create-task-button">
                 <span class="glyphicon glyphicon-plus"></span>
             </button>
         </div>
-        <div class="col-md-9">
-            <div class="row" style="margin-top:25px;">
-                <!-- Nested rows -->
-                <div class="row">
-                    <h2 class="h3" style="text-align:center;">Task text</h2>
+        <div class="col-md-9">   
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="btn-group">
+                        <button type="submit" name="save-task-button" class="btn btn-success"><span class="glyphicon glyphicon-save"></span> Save</button>
+                        <button type="button" name="delete-task-button" class="btn btn-danger">Delete <span class="glyphicon glyphicon-remove"></span></button>
+                    </div>
                 </div>
-                <!-- Text area for task text (instruction) -->
-                <div class="col-lg-12">
-                    <textarea style="resize:none" class="form-control" rows="15" id="task_text"></textarea>
-                </div>
-            </div>
+            </div>        
+            <div class="row sp">
+                <div class="col-md-12">
+                    <input type="text" class="form-control" id="task_name" placeholder="Task name">    
+                </div>         
+            </div>                 
+            <textarea style="resize:none" class="form-control sp" rows="15" id="task_description" placeholder="Task description"></textarea>            
 
             <!-- Second row-->
-            <div class="row" style="margin-top:15px;">
-                <!-- Create title for Rules -->
-                <div class="row">
-                    <h2 class="h3" style="text-align:center;">Rules</h2>
-                </div>
-                <!-- CheckBox with rules type -->
-                <div id="rule_list">
-                    <div class="rule">
-                        <div class="col-md-2">
-                            <div class="dropdown">
-                                <button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">
-                                    Add
-                                    <span class="caret"></span>
-                                </button>
-                                <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
-                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Test_1</a></li>
-                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Test_2</a></li>
-                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Test_3</a></li>
-                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Test_4</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <textarea style="resize:none" class="form-control" rows="1" id="link"></textarea>
-                        </div>
-                        <div class="col-md-4">
-                            <textarea style="resize: none" class="form-control" rows="1" id="link"></textarea>
-                        </div>
-                        <div class="col-md-1">
-                            <button type="button" name="add-parameter-button" class="btn btn-danger" style="height: 35px;">
-                                <span class="glyphicon glyphicon-minus"></span>
+            <div class="row">
+                <h2 class="h3" style="text-align:center;">Rules</h2>
+            </div>
+            <!-- CheckBox with rules type -->
+            <div id="rule_list">
+                <div class="rule row">
+                    <div class="col-md-3">
+                        <div class="dropdown">
+                            <button class="btn btn-default dropdown-toggle" type="button" id="menu1" style="width:100%" data-toggle="dropdown">
+                                Add
+                                <span class="caret"></span>
                             </button>
+                            <ul class="dropdown-menu" id="RuleTypeDropDown" role="menu" aria-labelledby="menu1">
+                                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Test_1</a></li>
+                                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Test_2</a></li>
+                                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Test_3</a></li>
+                                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Test_4</a></li>
+                            </ul>
                         </div>
+                    </div>
+                    <div class="col-md-4">
+                        <textarea style="resize:none" class="form-control" rows="1" id="link" placeholder="Rule selector"></textarea>
+                    </div>
+                    <div class="col-md-4">
+                        <textarea style="resize:none" class="form-control" rows="1" id="link" placeholder="Rule value"></textarea>
+                    </div>
+                    <div class="col-md-1">
+                        <button type="button" name="add-parameter-button" class="btn btn-danger pull-right">
+                            <span class="glyphicon glyphicon-minus"></span>
+                        </button>
                     </div>
                 </div>
             </div>
-            <!-- Four row - Button add-->
-            <div class="row" style="margin-top:15px;">
+            <div class="row" style="margin-top:15px">
                 <div class="col-md-12 center-block">
-                    <button type="button" name="add-parameter-button" class="btn btn-danger center-block" style="height:35px;">
+                    <button type="button" name="add-parameter-button" class="btn btn-success center-block">
                         <span class="glyphicon glyphicon-plus"></span>
                     </button>
                 </div>
             </div>
-        </div>
-    </div>
-</div>
-
-<div class="container-fluid" style="margin-top: 15px;">
-    <div class="row text-center ma">
-        <div class="btn-group">
-            <button type="submit" name="save-task-button" class="btn btn-success btn-lg">Save</button>
-            <button type="button" name="delete-task-button" class="btn btn-danger btn-lg">Delete</button>
-        </div>
-    </div>
+        </div>                
+    </div>    
 </div>
 
 @section scripts {
@@ -112,7 +103,8 @@
         function displayTask(id) {
             $.getJSON(uri.concat(id))
                 .done(function (task) {
-                    $('#task_text').val(task.Description);
+                    $('#task_description').val(task.Description);
+                    $('#task_name').val(task.Name);
                     $('#rule_list').empty();
                     $.each(task.Rule, function(key, rule) {
                         $('#rule_list').append(createRule(rule));
