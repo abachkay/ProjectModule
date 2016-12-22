@@ -106,33 +106,38 @@
             $('#rule_list').append(createRule({Type:ruleIds[0], Selector:"", Value:""}));
         }
 
-        function displayTask(id) {
+        function displayTask(task) {
+            $('#task_description').val(task.Description);
+            $('#task_name').val(task.Name);
+            $('#rule_list').empty();
+            $('#taskList').attr('name', task.Id);
+            $.each(task.Rule, function (key, rule) {
+                $('#rule_list').append(createRule(rule));
+            });
+        }
+
+        function loadTask(id) {
             $.getJSON(uri.concat(id))
                 .done(function (task) {
-                    $('#task_description').val(task.Description);
-                    $('#task_name').val(task.Name);
-                    $('#rule_list').empty();
-                    $('#taskList').attr('name',id);
-                    $.each(task.Rule, function(key, rule) {
-                        $('#rule_list').append(createRule(rule));
-                    });
+                    displayTask(task);
                 });
         }
 
         function loadTaskList() {
-            while (document.getElementById('taskList').children.length > 0)
-                document.getElementById('taskList').removeChild(document.getElementById('taskList').firstChild);
+            $('#taskList').empty();
             $.getJSON(uri)
                .done(function (data) {
                    $.each(data, function (key, item) {
                        $('<a></a>').attr("href", "#").attr("class", "list-group-item")
                            .html(item.Name)
                            .on('click', function () {
-                               displayTask(item.Id);
+                               displayTask(item);
                            })
                            .appendTo($('#taskList'));
-                   });
-               });
+                    });
+                    if (data.length > 0)
+                        displayTask(data[0]);
+                });
         }
         $(document).ready(function() {            
             loadTaskList();            
@@ -161,19 +166,15 @@
             previous.removeClass('active');
             $(e.target).addClass('active');
         });
-        function formatItem(item) {
-            return item.Name;
-        }
 
         function deleteTask() {        
-            if($('#taskList').attr('name')!='empty')
+            if($('#taskList').attr('name') !== 'empty')
                 $.ajax({
                 url: uri + $('#taskList').attr('name'),
                     type: 'DELETE',
                     contentType: 'application/json',
                     success: function (result) {
                         loadTaskList();
-                        document.getElementById('taskList').firstChild.click();
                     },
                     fail: (function () {
                         alert("error");
