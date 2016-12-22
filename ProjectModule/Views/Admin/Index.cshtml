@@ -91,9 +91,11 @@
                 .append($('<div></div>').addClass("col-md-2")
                     .append(createRuleTypeDropdown()))
                 .append($('<div></div>').addClass("col-md-4")
-                        .append($('<textarea></textarea>').addClass("form-control").attr("style", "resize:none").attr("rows", "1").attr("id", "link")))
+                        .append($('<textarea></textarea>').addClass("form-control").attr("style", "resize:none").attr("rows", "1").attr("id", "link")
+                            .val(rule.Selector)))
                 .append($('<div></div>').addClass("col-md-4")
-                        .append($('<textarea></textarea>').addClass("form-control").attr("style", "resize:none").attr("rows", "1").attr("id", "link")))
+                        .append($('<textarea></textarea>').addClass("form-control").attr("style", "resize:none").attr("rows", "1").attr("id", "link")
+                            .val(rule.Value)))
                 .append($('<div></div>').addClass("col-md-1"))
                 .append($('<button></button>').attr("type", "button").addClass("btn btn-danger").attr("name", "add-parameter-button").attr("style", "height:35px")
                     .append($('<span></span>').addClass("glyphicon glyphicon-plus")));
