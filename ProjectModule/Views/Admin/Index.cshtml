@@ -58,7 +58,7 @@
             </div>
             <div class="row" style="margin-top:15px">
                 <div class="col-md-12 center-block">
-                    <button type="button" name="add-parameter-button" class="btn btn-success center-block">
+                    <button type="button" name="add-parameter-button" class="btn btn-success center-block" onclick="addRule()">
                         <span class="glyphicon glyphicon-plus"></span>
                     </button>
                 </div>
@@ -96,10 +96,16 @@
                             .val(rule.Value)))
                 .append($('<div></div>').addClass("col-md-1")
                     .append($('<button></button>').attr("type", "button").addClass("btn btn-danger pull-right").attr("name", "add-parameter-button")
+                        .click(function(){$(this).parent().parent().remove() })
                         .append($('<span></span>').addClass("glyphicon glyphicon-minus"))));
 
             return ruleDiv;
         }
+
+        function addRule() {
+            $('#rule_list').append(createRule({Type:ruleIds[0], Selector:"", Value:""}));
+        }
+
         function displayTask(id) {
             $.getJSON(uri.concat(id))
                 .done(function (task) {
