@@ -43,7 +43,7 @@
                                 Add
                                 <span class="caret"></span>
                             </button>
-                            <ul class="dropdown-menu" id="RuleTypeDropDown" role="menu" aria-labelledby="menu1">
+                            <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
                                 <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Test_1</a></li>
                                 <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Test_2</a></li>
                                 <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Test_3</a></li>
@@ -78,13 +78,23 @@
 @section scripts {
     <script>
         var uri = '/api/tasks/';
+        var ruleTypeNames = ["XPath query", "XPath element style", "XPath attributes"];
+        var ruleIds = [1, 2, 3];
 
+        function createRuleTypeList() {
+            var ul = $('<ul></ul>').addClass("dropdown-menu").attr("role", "menu").attr("aria-labelledby", "menu1");
+            for (var i = 0; i < ruleTypeNames.length; ++i) {
+                ul.append($('<li></li>').attr("rule", "presentation")
+                    .append($('<a></a>').attr("role", "menuitem").attr("tabindex", "-1").attr("href", "#").html(ruleTypeNames[i])));
+            }
+            return ul;
+        }
         function createRuleTypeDropdown() {
             return $('<div></div>').addClass("dropdown")
                 .append($('<button></button>').addClass("btn btn-default dropdown-toggle").attr("type", "button").attr("style", "width:100%").attr("id", "menu1").attr("data-toggle", "dropdown")
                     .html('Add<span class="caret"></span>'))
-                .append($('<ul></ul>').addClass("dropdown-menu").attr("role", "menu").attr("aria-labelledby", "menu1")
-                    .html('<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Test_1</a></li>'));
+                .append(createRuleTypeList());
+//                    .html('<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Test_1</a></li>'));
         }
         function createRule(rule) {
             var ruleDiv = $('<div></div>').addClass("rule row")
