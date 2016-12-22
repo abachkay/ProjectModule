@@ -52,10 +52,10 @@
                         </div>
                     </div>
                     <div class="col-md-4">
-                        <textarea style="resize:none" class="form-control" rows="1" id="link" placeholder="Rule selector"></textarea>
+                        <textarea style="resize:none" class="form-control" rows="1" id="link" placeholder="Selector"></textarea>
                     </div>
                     <div class="col-md-4">
-                        <textarea style="resize:none" class="form-control" rows="1" id="link" placeholder="Rule value"></textarea>
+                        <textarea style="resize:none" class="form-control" rows="1" id="link" placeholder="Value"></textarea>
                     </div>
                     <div class="col-md-1">
                         <button type="button" name="add-parameter-button" class="btn btn-danger pull-right">
@@ -91,10 +91,10 @@
                 .append($('<div></div>').addClass("col-md-3")
                     .append(createRuleTypeDropdown()))
                 .append($('<div></div>').addClass("col-md-4")
-                        .append($('<textarea></textarea>').addClass("form-control").attr("style", "resize:none").attr("rows", "1").attr("id", "link")
+                        .append($('<textarea></textarea>').addClass("form-control").attr("style", "resize:none").attr("rows", "1").attr("placeholder", "Selector")
                             .val(rule.Selector)))
                 .append($('<div></div>').addClass("col-md-4")
-                        .append($('<textarea></textarea>').addClass("form-control").attr("style", "resize:none").attr("rows", "1").attr("id", "link")
+                        .append($('<textarea></textarea>').addClass("form-control").attr("style", "resize:none").attr("rows", "1").attr("placeholder", "Value")
                             .val(rule.Value)))
                 .append($('<div></div>').addClass("col-md-1")
                     .append($('<button></button>').attr("type", "button").addClass("btn btn-danger pull-right").attr("name", "add-parameter-button")
