@@ -7,7 +7,7 @@
     <div class="row" style="margin-top:15px">
         <div class="col-md-3">
 
-            <div class="list-group" title="TASKS" id="taskList" name="empty">
+            <div class="list-group" title="TASKS" id="taskList"  name="empty">
                 <a href="#" class="list-group-item disabled"><b>Tasks</b></a>
             </div>
             <button type="button" class="btn btn-success btn-circle center-block add_btn" onclick="addTask()" name="create-task-button">
@@ -19,7 +19,7 @@
                 <div class="col-md-12">
                     <div class="btn-group">
                         <button type="submit" name="save-task-button" class="btn btn-success"><span class="glyphicon glyphicon-save"></span> Save</button>
-                        <button type="button" name="delete-task-button" class="btn btn-danger">Delete <span class="glyphicon glyphicon-remove"></span></button>
+                        <button type="button" name="delete-task-button" class="btn btn-danger" onclick="deleteTask();">Delete <span class="glyphicon glyphicon-remove"></span></button>
                     </div>
                 </div>
             </div>        
@@ -118,29 +118,31 @@
                     $('#task_description').val(task.Description);
                     $('#task_name').val(task.Name);
                     $('#rule_list').empty();
-                    $('#taskList').attr('Name',id);
+                    $('#taskList').attr('name',id);
                     $.each(task.Rule, function(key, rule) {
                         $('#rule_list').append(createRule(rule));
                     });
                 });
         }
 
-        $(document).ready(function() {
-            // Send an AJAX request
+        function loadTaskList() {
+            while (document.getElementById('taskList').children.length > 0)
+                document.getElementById('taskList').removeChild(document.getElementById('taskList').firstChild);
             $.getJSON(uri)
-                .done(function(data) {
-                    // On success, 'data' contains a list of products.
-                    $.each(data, function(key, item) {
-                        // Add a list item for the product.
-                        $('<a></a>').attr("href", "#").attr("class", "list-group-item")
-                            .html(item.Name)
-                            .on('click', function() {
-                                displayTask(item.Id);
-                            })
-                            .appendTo($('#taskList'));
-                    });
-                });
-           
+               .done(function (data) {
+                   $.each(data, function (key, item) {
+                       $('<a></a>').attr("href", "#").attr("class", "list-group-item")
+                           .html(item.Name)
+                           .on('click', function () {
+                               displayTask(item.Id);
+                           })
+                           .appendTo($('#taskList'));
+                   });
+               });
+        }
+        $(document).ready(function() {            
+            loadTaskList();
+            alert($('#taskList:first-child').width());
         });
 
         function clearFields() {
@@ -156,7 +158,7 @@
                             .html("Нове завдання")
                             .on('click', function () {
                                 clearFields();
-                                $('#taskList').attr('Name', 'empty');
+                                $('#taskList').attr('name', 'empty');
                             })
                             .appendTo($('#taskList'));
         }
@@ -168,6 +170,22 @@
         });
         function formatItem(item) {
             return item.Name;
+        }
+
+        function deleteTask() {        
+            if($('#taskList').attr('name')!='empty')
+                $.ajax({
+                url: uri + $('#taskList').attr('name'),
+                    type: 'DELETE',
+                    contentType: 'application/json',
+                    success: function (result) {
+                        loadTaskList();
+                        document.getElementById('taskList').firstChild.click();
+                    },
+                    fail: (function () {
+                        alert("error");
+                    })
+                });
         }
     </script>
 }

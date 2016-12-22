@@ -1,11 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.25123.0
+VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjectModule", "ProjectModule\ProjectModule.csproj", "{ACBFD751-F110-4507-AB1A-7DA4F578DCE4}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjectModuleTests3", "ProjectModuleTests3\ProjectModuleTests3.csproj", "{7265B179-0EBE-43D4-A4CD-F2B089688FAF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +15,6 @@ Global
 		{ACBFD751-F110-4507-AB1A-7DA4F578DCE4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ACBFD751-F110-4507-AB1A-7DA4F578DCE4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ACBFD751-F110-4507-AB1A-7DA4F578DCE4}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7265B179-0EBE-43D4-A4CD-F2B089688FAF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7265B179-0EBE-43D4-A4CD-F2B089688FAF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7265B179-0EBE-43D4-A4CD-F2B089688FAF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7265B179-0EBE-43D4-A4CD-F2B089688FAF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
