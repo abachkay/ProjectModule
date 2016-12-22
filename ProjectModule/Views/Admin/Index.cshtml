@@ -52,10 +52,10 @@
                         </div>
                     </div>
                     <div class="col-md-4">
-                        <textarea style="resize:none" class="form-control" rows="1" id="link" placeholder="Selector"></textarea>
+                        <textarea style="resize:none" class="form-control" rows="1" placeholder="Selector"></textarea>
                     </div>
                     <div class="col-md-4">
-                        <textarea style="resize:none" class="form-control" rows="1" id="link" placeholder="Value"></textarea>
+                        <textarea style="resize:none" class="form-control" rows="1" placeholder="Value"></textarea>
                     </div>
                     <div class="col-md-1">
                         <button type="button" name="add-parameter-button" class="btn btn-danger pull-right">
@@ -125,7 +125,6 @@
                 });
         }
 
-
         $(document).ready(function() {
             // Send an AJAX request
             $.getJSON(uri)
@@ -143,10 +142,20 @@
                 });
            
         });
+
+        function clearFields() {
+            $('#task_name').val('');
+            $('#task_description').val('');
+            $('.form-control').val('');
+            while (document.getElementById('rule_list').children.length > 1)
+                document.getElementById('rule_list').removeChild(document.getElementById('rule_list').firstChild);
+        }
+
         function addTask() {
             $('<a></a>').attr("href", "#").attr("class", "list-group-item")
                             .html("Нове завдання")
-                            .on('click', function() {
+                            .on('click', function () {
+                                clearFields();
                                 $('#taskList').attr('Name', 'empty');
                             })
                             .appendTo($('#taskList'));
