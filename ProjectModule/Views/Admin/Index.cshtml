@@ -38,18 +38,10 @@
             <div id="rule_list">
                 <div class="rule row">
                     <div class="col-md-3">
-                        <div class="dropdown">
-                            <button class="btn btn-default dropdown-toggle" type="button" id="menu1" style="width:100%" data-toggle="dropdown">
-                                Add
-                                <span class="caret"></span>
-                            </button>
-                            <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
-                                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Test_1</a></li>
-                                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Test_2</a></li>
-                                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Test_3</a></li>
-                                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Test_4</a></li>
-                            </ul>
-                        </div>
+                        <select class="selectpicker form-control">
+                            <option>dfgdg</option>
+                            <option>xchdfj</option>
+                        </select>
                     </div>
                     <div class="col-md-4">
                         <textarea style="resize:none" class="form-control" rows="1" placeholder="Selector"></textarea>
@@ -66,7 +58,7 @@
             </div>
             <div class="row" style="margin-top:15px">
                 <div class="col-md-12 center-block">
-                    <button type="button" name="add-parameter-button" class="btn btn-success center-block">
+                    <button type="button" name="add-parameter-button" class="btn btn-success center-block" onclick="addRule()">
                         <span class="glyphicon glyphicon-plus"></span>
                     </button>
                 </div>
@@ -81,25 +73,21 @@
         var ruleTypeNames = ["XPath query", "XPath element style", "XPath attributes"];
         var ruleIds = [1, 2, 3];
 
-        function createRuleTypeList() {
-            var ul = $('<ul></ul>').addClass("dropdown-menu").attr("role", "menu").attr("aria-labelledby", "menu1");
+        function createRuleTypeList(rule) {
+            var div = $('<div></div>').addClass("col-md-3");
+            var s = $('<select></select>').addClass("selectpicker form-control");
             for (var i = 0; i < ruleTypeNames.length; ++i) {
-                ul.append($('<li></li>').attr("rule", "presentation")
-                    .append($('<a></a>').attr("role", "menuitem").attr("tabindex", "-1").attr("href", "#").html(ruleTypeNames[i])));
+                var option = $('<option></option>').attr("value", ruleIds[i]).text(ruleTypeNames[i]);
+                s.append(option);
             }
-            return ul;
+            s.val(rule.Type);
+            s.appendTo(div).selectpicker('refresh');
+            return div;
         }
-        function createRuleTypeDropdown() {
-            return $('<div></div>').addClass("dropdown")
-                .append($('<button></button>').addClass("btn btn-default dropdown-toggle").attr("type", "button").attr("style", "width:100%").attr("id", "menu1").attr("data-toggle", "dropdown")
-                    .html('Add<span class="caret"></span>'))
-                .append(createRuleTypeList());
-//                    .html('<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Test_1</a></li>'));
-        }
+
         function createRule(rule) {
-            var ruleDiv = $('<div></div>').addClass("rule row")
-                .append($('<div></div>').addClass("col-md-3")
-                    .append(createRuleTypeDropdown()))
+            var ruleDiv = $('<div></div>').addClass("rule row").attr("style", "margin-bottom:10px")
+                .append(createRuleTypeList(rule))
                 .append($('<div></div>').addClass("col-md-4")
                         .append($('<textarea></textarea>').addClass("form-control").attr("style", "resize:none").attr("rows", "1").attr("placeholder", "Selector")
                             .val(rule.Selector)))
@@ -108,10 +96,16 @@
                             .val(rule.Value)))
                 .append($('<div></div>').addClass("col-md-1")
                     .append($('<button></button>').attr("type", "button").addClass("btn btn-danger pull-right").attr("name", "add-parameter-button")
+                        .click(function(){$(this).parent().parent().remove() })
                         .append($('<span></span>').addClass("glyphicon glyphicon-minus"))));
 
             return ruleDiv;
         }
+
+        function addRule() {
+            $('#rule_list').append(createRule({Type:ruleIds[0], Selector:"", Value:""}));
+        }
+
         function displayTask(id) {
             $.getJSON(uri.concat(id))
                 .done(function (task) {
