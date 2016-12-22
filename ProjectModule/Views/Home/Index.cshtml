@@ -6,6 +6,7 @@
 <script src="~/Scripts/xml.js"></script>
 <script src="~/Scripts/css.js"></script>
 <script src="~/Scripts/mirror.js"></script>
+<script src="~/Scripts/autorefresh.js"></script>
 <div id="mySidenav" class="sidenav">
     <a id="close" href="javascript:void(0)" class="closebtn">&times;</a>
     <h1>All tasks:</h1>
@@ -113,17 +114,18 @@
     .CodeMirror {
         text-align: left;
         margin-bottom: 5px;
-        height: 400px;
+        height: 450px;
     }
 </style>
 <script>
 
     var myCodeMirror = CodeMirror.fromTextArea(document.getElementById('css_code'), {
-        //lineNumbers: true,               // показывать номера строк
+        lineNumbers: true,               // показывать номера строк
         matchBrackets: true,             // подсвечивать парные скобки
         mode: 'css', // стиль подсветки
-        //htmlMode: true,
-        indentUnit: 4                    // размер табуляции
+        htmlMode: true,
+        indentUnit: 4,
+        autoRefresh: true// размер табуляции
     });
 
 
@@ -132,7 +134,8 @@
         matchBrackets: true,             // подсвечивать парные скобки
         mode: 'xml', // стиль подсветки
         htmlMode: true,
-        indentUnit: 4                    // размер табуляции
+        indentUnit: 4
+       // размер табуляции
     });
  
 </script>
