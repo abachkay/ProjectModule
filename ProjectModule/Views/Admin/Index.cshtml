@@ -89,7 +89,15 @@
 
 @section scripts {
     <script>
-        var uri = '/api/tasks';
+        var uri = '/api/tasks/';
+
+        function displayTask(id) {
+            $.getJSON(uri.concat(id))
+                .done(function (task) {
+                    $('#task_text').val(task.Description);
+                });
+        }
+
 
         $(document).ready(function() {
             // Send an AJAX request
@@ -99,7 +107,11 @@
                     $.each(data, function(key, item) {
                         // Add a list item for the product.
                         $('<a></a>').attr("href", "#").attr("class", "list-group-item")
-                            .html(item.Name).appendTo($('#taskList'));
+                            .html(item.Name)
+                            .on('click', function() {
+                                displayTask(item.Id);
+                            })
+                            .appendTo($('#taskList'));
                     });
                 });
            
