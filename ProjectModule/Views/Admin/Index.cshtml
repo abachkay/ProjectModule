@@ -7,7 +7,7 @@
     <div class="row" style="margin-top:15px">
         <div class="col-md-3">
 
-            <div class="list-group" title="TASKS" id="taskList">
+            <div class="list-group" title="TASKS" id="taskList" name="empty">
                 <a href="#" class="list-group-item disabled"><b>Tasks</b></a>
             </div>
             <button type="button" class="btn btn-success btn-circle center-block add_btn" onclick="addTask()" name="create-task-button">
@@ -44,10 +44,10 @@
                         </select>
                     </div>
                     <div class="col-md-4">
-                        <textarea style="resize:none" class="form-control" rows="1" id="link" placeholder="Selector"></textarea>
+                        <textarea style="resize:none" class="form-control" rows="1" placeholder="Selector"></textarea>
                     </div>
                     <div class="col-md-4">
-                        <textarea style="resize:none" class="form-control" rows="1" id="link" placeholder="Value"></textarea>
+                        <textarea style="resize:none" class="form-control" rows="1" placeholder="Value"></textarea>
                     </div>
                     <div class="col-md-1">
                         <button type="button" name="add-parameter-button" class="btn btn-danger pull-right">
@@ -106,16 +106,12 @@
                     $('#task_description').val(task.Description);
                     $('#task_name').val(task.Name);
                     $('#rule_list').empty();
+                    $('#taskList').attr('Name',id);
                     $.each(task.Rule, function(key, rule) {
                         $('#rule_list').append(createRule(rule));
                     });
                 });
         }
-
-        $(".rule_type_menu .dropdown-menu li a").click(function () {
-            $(".btn:first-child").text($(this).text());
-            $(".btn:first-child").val($(this).text());
-        });
 
         $(document).ready(function() {
             // Send an AJAX request
@@ -134,8 +130,23 @@
                 });
            
         });
+
+        function clearFields() {
+            $('#task_name').val('');
+            $('#task_description').val('');
+            $('.form-control').val('');
+            while (document.getElementById('rule_list').children.length > 1)
+                document.getElementById('rule_list').removeChild(document.getElementById('rule_list').firstChild);
+        }
+
         function addTask() {
-            $("#taskList").append("<li class='list-group-item'>Task</li>");
+            $('<a></a>').attr("href", "#").attr("class", "list-group-item")
+                            .html("Нове завдання")
+                            .on('click', function () {
+                                clearFields();
+                                $('#taskList').attr('Name', 'empty');
+                            })
+                            .appendTo($('#taskList'));
         }
 
         $('.list-group-item').on('click', function (e) {
