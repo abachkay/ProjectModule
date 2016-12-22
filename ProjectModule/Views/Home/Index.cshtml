@@ -45,7 +45,7 @@
 
                     <div class="tab-content clearfix">
                         <div class="tab-pane active" id="html">
-                            <textarea name="htmlCode" id="html_code" cols="10" rows="10">@if (ViewBag.PreviousHtmlCode != null)
+                            <textarea name="htmlCode" id="html_code">@if (ViewBag.PreviousHtmlCode != null)
                             {@ViewBag.PreviousHtmlCode}</textarea>
                         </div>
                         <div class="tab-pane" id="css">
@@ -109,13 +109,20 @@
     </div>
 </div>
 
+<style>
+    .CodeMirror {
+        text-align: left;
+        margin-bottom: 5px;
+        height: 400px;
+    }
+</style>
 <script>
 
     var myCodeMirror = CodeMirror.fromTextArea(document.getElementById('css_code'), {
-        lineNumbers: true,               // показывать номера строк
+        //lineNumbers: true,               // показывать номера строк
         matchBrackets: true,             // подсвечивать парные скобки
         mode: 'css', // стиль подсветки
-        htmlMode: true,
+        //htmlMode: true,
         indentUnit: 4                    // размер табуляции
     });
 
