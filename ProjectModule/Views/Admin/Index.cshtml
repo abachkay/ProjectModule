@@ -14,17 +14,19 @@
                 <span class="glyphicon glyphicon-plus"></span>
             </button>
         </div>
-        <div class="col-md-9">         
+        <div class="col-md-9">   
             <div class="row">
-                <div class="col-md-8">
-                    <input type="text" class="form-control" id="TaskName" placeholder="Task name">
-                </div>
-                <div class="col-md-4">
-                    <div class="btn-group pull-right">
-                        <button type="submit" name="save-task-button" class="btn btn-success">Save</button>
-                        <button type="button" name="delete-task-button" class="btn btn-danger">Delete</button>
+                <div class="col-md-12">
+                    <div class="btn-group">
+                        <button type="submit" name="save-task-button" class="btn btn-success"><span class="glyphicon glyphicon-save"></span> Save</button>
+                        <button type="button" name="delete-task-button" class="btn btn-danger">Delete <span class="glyphicon glyphicon-remove"></span></button>
                     </div>
                 </div>
+            </div>        
+            <div class="row sp">
+                <div class="col-md-12">
+                    <input type="text" class="form-control" id="TaskName" placeholder="Task name">    
+                </div>         
             </div>                 
             <textarea style="resize:none" class="form-control sp" rows="15" id="TaskDescription" placeholder="Task description"></textarea>            
 
