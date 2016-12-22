@@ -5,6 +5,8 @@
     function renderReslut() {
         var htmlText = document.getElementById("htmlText").value;
         var cssText = document.getElementById("cssText").value;
+        if (!htmlText)
+            return;
         var ifr = document.createElement("iframe");
         ifr.setAttribute("frameborder", "0");
         ifr.setAttribute("id", "iframeResult");
@@ -19,11 +21,18 @@
         ifrw.document.open();
         ifrw.document.write(htmlText);
 
+        if (!cssText) {
+            ifrw.document.close();
+            return;
+        }
         var style = ifrw.document.createElement("style");
         style.innerHTML = cssText;
         ifrw.document.head.appendChild(style);
         ifrw.document.close();
     }
+
+    document.addEventListener("DOMContentLoaded", renderReslut);
+
 </script>
 
 <div id="mySidenav" class="sidenav">
@@ -64,10 +73,10 @@
 
                     <div class="tab-content clearfix">
                         <div class="tab-pane active" id="html">
-                            <textarea name="htmlCode" id="htmlText" cols="10" rows="10" onchange="renderReslut()">@if (ViewBag.PreviousHtmlCode != null){@ViewBag.PreviousHtmlCode}</textarea>
+                            <textarea name="htmlCode" id="htmlText" cols="10" rows="10" onchange="renderReslut()" onkeyup="renderReslut()">@if (ViewBag.PreviousHtmlCode != null){@ViewBag.PreviousHtmlCode}</textarea>
                         </div>
                         <div class="tab-pane" id="css">
-                            <textarea name="cssCode" id="cssText" cols="30" rows="10" onchange="renderReslut()">@if (ViewBag.PreviousCssCode != null){@ViewBag.PreviousCssCode}</textarea>
+                            <textarea name="cssCode" id="cssText" cols="30" rows="10" onchange="renderReslut()" onkeyup="renderReslut()">@if (ViewBag.PreviousCssCode != null){@ViewBag.PreviousCssCode}</textarea>
                         </div>
                     </div>
                 </div>
