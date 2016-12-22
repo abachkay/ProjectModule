@@ -1,10 +1,11 @@
 ﻿@{
     ViewBag.Title = "Home Page";
 }
+
 <script>
-    function renderReslut() {
-        var htmlText = document.getElementById("htmlText").value;
-        var cssText = document.getElementById("cssText").value;
+    function renderReslut() {       
+        var htmlText = myCodeMirror_1.getValue();
+        var cssText = myCodeMirror.getValue();
         if (!htmlText)
             return;
         var ifr = document.createElement("iframe");
@@ -34,6 +35,13 @@
     document.addEventListener("DOMContentLoaded", renderReslut);
 
 </script>
+<script src="~/Scripts/codemirror.js"></script>
+<link href="~/Content/codemirror.css" rel="stylesheet">
+<script src="~/Scripts/xml.js"></script>
+<script src="~/Scripts/css.js"></script>
+<script src="~/Scripts/mirror.js"></script>
+<script src="~/Scripts/autorefresh.js"></script>
+
 
 <div id="mySidenav" class="sidenav">
     <a id="close" href="javascript:void(0)" class="closebtn">&times;</a>
@@ -73,10 +81,11 @@
 
                     <div class="tab-content clearfix">
                         <div class="tab-pane active" id="html">
+
                             <textarea name="htmlCode" id="htmlText" cols="10" rows="10" onchange="renderReslut()" onkeyup="renderReslut()">@if (ViewBag.PreviousHtmlCode != null){@ViewBag.PreviousHtmlCode}</textarea>
                         </div>
                         <div class="tab-pane" id="css">
-                            <textarea name="cssCode" id="cssText" cols="30" rows="10" onchange="renderReslut()" onkeyup="renderReslut()">@if (ViewBag.PreviousCssCode != null){@ViewBag.PreviousCssCode}</textarea>
+                            <textarea name="cssCode" id="cssText" cols="30" rows="10" onchange="renderReslut()" onkeyup="renderReslut()">@if (ViewBag.PreviousCssCode != null){@ViewBag.PreviousCssCode}</textarea>                   
                         </div>
                     </div>
                 </div>
@@ -106,7 +115,7 @@
                             }
                             else
                             {
-                                <button type="button" class="panel-body btn btn-info btn-lg pull-right disabled" style="width:100%;border-radius:0;">
+                                <button type="button" class="panel-body btn btn-info btn-lg pull-right disabled" style="width:100%;border-radius:0;" onclick="renderReslut()">
                                     Далі<span class="glyphicon glyphicon-circle-arrow-right"></span>
                                 </button>
                             }
@@ -133,3 +142,43 @@
         </div>
     </div>
 </div>
+
+<style>
+    .CodeMirror {
+        text-align: left;
+        margin-bottom: 5px;
+        height: 450px;
+    }
+</style>
+<script>
+
+    var myCodeMirror = CodeMirror.fromTextArea(document.getElementById('cssText'), {
+        lineNumbers: true,               
+        matchBrackets: true,             
+        mode: 'css', 
+        htmlMode: true,
+        indentUnit: 4,
+        autoRefresh: true
+    }); 
+
+
+    var myCodeMirror_1 = CodeMirror.fromTextArea(document.getElementById('htmlText'), {
+        lineNumbers: true,               
+        matchBrackets: true,             
+        mode: 'xml', 
+        htmlMode: true,
+        indentUnit: 4       
+    });
+    
+    myCodeMirror_1.on('change', function () {
+        renderReslut();    
+    });
+    myCodeMirror.on('change', function () {
+        renderReslut();     
+    });
+ 
+</script>
+
+@section scripts{
+    @Scripts.Render("~/bundles/jquery")
+}
