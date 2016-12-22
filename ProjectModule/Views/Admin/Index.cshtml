@@ -79,7 +79,8 @@
         function displayTask(id) {
             $.getJSON(uri.concat(id))
                 .done(function (task) {
-                    $('#task_text').val(task.Description);
+                    $('#TaskDescription').val(task.Description);
+                    $('#TaskName').val(task.Name);
                 });
         }
 
