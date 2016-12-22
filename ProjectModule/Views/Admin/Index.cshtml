@@ -8,7 +8,7 @@
         <div class="col-md-3">
 
             <div class="list-group" title="TASKS" id="taskList" style="margin-top:80px; max-width:100%; min-width: 40%;">
-@*                <a href="#" class="list-group-item disabled"><b>Tasks</b></a>*@
+                <a href="#" class="list-group-item disabled"><b>Tasks</b></a>
 @*                <a href="#" class="list-group-item">Task</a>*@
 @*                <a href="#" class="list-group-item">Task</a>*@
 @*                <a href="#" class="list-group-item">Task</a>*@
@@ -17,7 +17,9 @@
 @*                <a href="#" class="list-group-item">Task</a>*@
 @*                <a href="#" class="list-group-item">Task</a>*@
             </div>
-            <button type="button" class="btn btn-danger center-block" name="create-task-button" style="border-radius: 50px">+</button>
+            <button type="button" class="btn btn-danger center-block add_btn" onclick="addTask()" name="create-task-button">
+                <span class="glyphicon glyphicon-plus"></span>
+            </button>
         </div>
         <div class="col-md-9">
             <div class="row" style="margin-top:25px;">
@@ -39,12 +41,18 @@
                 </div>
                 <!-- CheckBox with rules type -->
                 <div class="col-md-2">
-                    <select>
-                        <option value="Option">Option</option>
-                        <option value="Option">Option</option>
-                        <option value="Option">Option</option>
-                        <option value="Option">Option</option>
-                    </select>
+                    <div class="dropdown">
+                        <button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">
+                            Add
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
+                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Test_1</a></li>
+                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Test_2</a></li>
+                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Test_3</a></li>                            
+                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Test_4</a></li>
+                        </ul>
+                    </div>
                 </div>
                 <div class="col-md-4">
                     <textarea style="resize:none" class="form-control" rows="1" id="link"></textarea>
@@ -53,13 +61,17 @@
                     <textarea style="resize:none" class="form-control" rows="1" id="link"></textarea>
                 </div>
                 <div class="col-md-1">
-                    <button type="button" name="add-parameter-button" class="btn btn-danger center-block" style="border-radius: 50px">-</button>
+                    <button type="button" name="add-parameter-button" class="btn btn-danger" style="height:35px;">
+                        <span class="glyphicon glyphicon-minus"></span>
+                    </button>
                 </div>
             </div>
             <!-- Four row - Button add-->
             <div class="row" style="margin-top:15px;">
                 <div class="col-md-12 center-block">
-                    <button type="button" name="add-parameter-button" class="btn btn-danger center-block" style="border-radius: 50px">+</button>
+                    <button type="button" name="add-parameter-button" class="btn btn-danger center-block" style="height:35px;">
+                        <span class="glyphicon glyphicon-plus"></span>
+                    </button>
                 </div>
             </div>
         </div>
@@ -74,6 +86,7 @@
         </div>
     </div>
 </div>
+
 @section scripts {
     <script>
         var uri = '/api/tasks';
@@ -89,12 +102,21 @@
                             .html(item.Name).appendTo($('#taskList'));
                     });
                 });
+           
         });
+        function addTask() {
+            $("#taskList").append("<li class='list-group-item'>Task</li>");
+        }
 
+        $('.list-group-item').on('click', function (e) {
+            var previous = $(this).closest(".list-group").children(".active");
+            previous.removeClass('active');
+            $(e.target).addClass('active');
+        });
         function formatItem(item) {
             return item.Name;
         }
-
+        
 //    function find() {
 //      var id = $('#prodId').val();
 //      $.getJSON(uri + '/' + id)
