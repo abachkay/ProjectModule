@@ -10,11 +10,14 @@
                 <h2 class="h3" style="text-align:center;">Завдання</h2>
             </div>
 
-            <div class="list-group" title="TASKS" id="taskList"  name="empty">
+            <div class="list-group" title="TASKS" id="taskList" style="max-height:360px;overflow-y:scroll" name="empty">
                 <a href="#" class="list-group-item disabled"><b>Tasks</b></a>
             </div>
-            <button type="button" class="btn btn-success btn-circle center-block add_btn" style="border-radius:0" onclick="addTask()" name="create-task-button">
+            <button type="button" class="btn btn-success center-block add_btn" style="border-radius:0" onclick="addTask()" name="create-task-button">
                 <span class="glyphicon glyphicon-plus"></span>
+            </button>
+            <button type="button" class="btn btn-success" style="border-radius:0; margin-top:15px; width:100%" onclick="location.href='/Home'">
+                Перегляд завдань
             </button>
         </div>
         <div class="col-md-9">   
@@ -38,7 +41,7 @@
                 <h2 class="h3" style="text-align:center;">Правила</h2>
             </div>
             <!-- CheckBox with rules type -->
-            <div id="rule_list">
+            <div id="rule_list" style="margin-top:10px">
                 <div class="rule row">
                     <div class="col-md-3">
                         <select class="selectpicker form-control">
