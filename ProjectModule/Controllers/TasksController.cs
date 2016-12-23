@@ -103,6 +103,11 @@ namespace ProjectModule.Controllers
                 return NotFound();
             }
 
+            foreach (var rule in _db.Rule.Where(r => r.Id == task.Id))
+            {
+                _db.Rule.Remove(rule);
+            }
+
             _db.Task.Remove(task);
             _db.SaveChanges();
 
