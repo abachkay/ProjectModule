@@ -92,21 +92,21 @@
             var ruleDiv = $('<div></div>').addClass("rule row").attr("style", "margin-bottom:10px")
                 .append(createRuleTypeList(rule))
                 .append($('<div></div>').addClass("col-md-4")
-                        .append($('<textarea></textarea>').addClass("form-control").attr("style", "resize:none").attr("rows", "1").attr("placeholder", "Selector")
-                            .val(rule.Selector)))
+                    .append($('<textarea></textarea>').addClass("form-control").attr("style", "resize:none").attr("rows", "1").attr("placeholder", "Selector")
+                        .val(rule.Selector)))
                 .append($('<div></div>').addClass("col-md-4")
-                        .append($('<textarea></textarea>').addClass("form-control").attr("style", "resize:none").attr("rows", "1").attr("placeholder", "Value")
-                            .val(rule.Value)))
+                    .append($('<textarea></textarea>').addClass("form-control").attr("style", "resize:none").attr("rows", "1").attr("placeholder", "Value")
+                        .val(rule.Value)))
                 .append($('<div></div>').addClass("col-md-1")
                     .append($('<button></button>').attr("type", "button").addClass("btn btn-danger pull-right").attr("name", "add-parameter-button")
-                        .click(function(){$(this).parent().parent().remove() })
+                        .click(function() { $(this).parent().parent().remove() })
                         .append($('<span></span>').addClass("glyphicon glyphicon-minus"))));
 
             return ruleDiv;
         }
 
         function addRule() {
-            $('#rule_list').append(createRule({Type:ruleIds[0], Selector:"", Value:""}));
+            $('#rule_list').append(createRule({ Type: ruleIds[0], Selector: "", Value: "" }));
         }
 
         function displayTask(task) {
@@ -114,14 +114,14 @@
             $('#task_name').val(task.Name);
             $('#rule_list').empty();
             $('#taskList').attr('name', task.Id);
-            $.each(task.Rule, function (key, rule) {
+            $.each(task.Rule, function(key, rule) {
                 $('#rule_list').append(createRule(rule));
             });
         }
 
         function loadTask(id) {
             $.getJSON(uri.concat(id))
-                .done(function (task) {
+                .done(function(task) {
                     displayTask(task);
                 });
         }
@@ -129,91 +129,93 @@
         function loadTaskList() {
             $('#taskList').empty();
             $.getJSON(uri)
-               .done(function (data) {
-                   $.each(data, function (key, item) {
-                       $('<a></a>').attr("href", "#").attr("class", "list-group-item")
-                           .html(item.Name)
-                           .on('click', function () {
-                               displayTask(item);
-                           })
-                           .appendTo($('#taskList'));
+                .done(function(data) {
+                    $.each(data, function(key, item) {
+                        $('<a></a>').attr("href", "#").attr("class", "list-group-item")
+                            .html(item.Name)
+                            .on('click', function() {
+                                displayTask(item);
+                            })
+                            .appendTo($('#taskList'));
                     });
                     if (data.length > 0)
                         displayTask(data[0]);
                 });
         }
-        $(document).ready(function() {            
-            loadTaskList();            
+
+        $(document).ready(function() {
+            loadTaskList();
         });
 
         function clearFields() {
             $('#task_name').val('');
             $('#task_description').val('');
             $('.form-control').val('');
-            while (document.getElementById('rule_list').children.length > 1)
-                document.getElementById('rule_list').removeChild(document.getElementById('rule_list').firstChild);
+            $('#rule_list').empty();
+            addRule();
         }
 
         function addTask() {
             $('<a></a>').attr("href", "#").attr("class", "list-group-item")
-                            .html("Нове завдання")
-                            .on('click', function () {
-                                clearFields();
-                                $('#taskList').attr('name', 'empty');
-                            })
-                            .appendTo($('#taskList'));
+                .html("Нове завдання")
+                .on('click', function() {
+                    clearFields();
+                    $('#taskList').attr('name', 'empty');
+                })
+                .appendTo($('#taskList'));
         }
 
-        $('.list-group-item').on('click', function (e) {
+        $('.list-group-item').on('click', function(e) {
             var previous = $(this).closest(".list-group").children(".active");
             previous.removeClass('active');
             $(e.target).addClass('active');
         });
 
-        function deleteTask() {        
-            if($('#taskList').attr('name') !== 'empty')
+        function deleteTask() {
+            if ($('#taskList').attr('name') !== 'empty')
                 $.ajax({
-                url: uri + $('#taskList').attr('name'),
+                    url: uri + $('#taskList').attr('name'),
                     type: 'DELETE',
                     contentType: 'application/json',
-                    success: function (result) {
+                    success: function(result) {
                         loadTaskList();
                     },
-                    fail: (function () {
+                    fail: (function() {
                         alert("error");
                     })
                 });
         }
 
         function putTask() {
-            var idToModify = $('#taskList').attr('name');                
-            var obj = '{"Rule":[';           
             var rulesDivs = document.getElementById('rule_list').children;
+            var result = {
+                Name: $('#task_name').val(),
+                Description: $('#task_description').val(),
+                Rule: [],
+                Id: -1
+            }
+            var idToModify = $('#taskList').attr('name');
+            if (idToModify != 'empty') {
+                result.Id = idToModify;
+            }
+
             for (var i = 0; i < rulesDivs.length; i++) {
                 var ruleTypeId = $(rulesDivs[i]).find('.selectpicker').selectpicker('val');
-                obj = obj + '{"Type":' + ruleTypeId + ',"Selector":"' + rulesDivs[i].children[1].children[0].value + '","Value":"' + 
-                    rulesDivs[i].children[2].children[0].value + '"}';
-                if (i !== rulesDivs.length - 1)
-                    obj = obj + ',';              
+                var rule = {
+                    Type: ruleTypeId,
+                    Selector: rulesDivs[i].children[1].children[0].value,
+                    Value: rulesDivs[i].children[2].children[0].value
+                }
+                result.Rule.push(rule);
             }
-            if (idToModify == 'empty') {
-                obj = obj + '],"Name":"';
-                obj = obj + $('#task_name').val() + '","Description":"';
-            }
-            else
-            {
-                obj = obj + '],"Id":';
-                obj = obj + idToModify + ',"Name":"';
-                obj = obj + $('#task_name').val() + '","Description":"';
-            }
-            obj = obj + $('#task_description').val() + '"}';
+            var o = JSON.stringify(result);
             //alert(obj);              
             jQuery.ajax({
                 url: uri,
                 type: "PUT",
-                data: obj,
+                data: o,
                 contentType: "application/json",
-                success: function (data) {
+                success: function(data) {
                     loadTaskList();
                     displayTask(data);
                 }
