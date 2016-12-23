@@ -183,22 +183,44 @@
         }
 
         function putTask() {
-            //var obj = '{"Rule": [{"Type": 1,"Selector": "//h1","Value": ""},{"Type": 1,"Selector": "//h2","Value": ""}],"Name": "task1","Description": "Додайте тег <h1> та <h2> на сторінку"}';            
-            var obj = '{"Rule":[';
+            var idToModify = $('#taskList').attr('name');                
+            var obj = '{"Rule":[';           
+            var rulesDivs = document.getElementById('rule_list').children;
+            for (var i = 0; i < rulesDivs.length; i++) {                
+                var ruleType = rulesDivs[i].children[0].children[0].children[0].children[0].innerText;
+                if (ruleType == "XPath query")
+                    var ruleTypeId = 0;
+                if (ruleType == "XPath element style")
+                    var ruleTypeId = 1;
+                if (ruleType == "XPath attributes")
+                    var ruleTypeId = 2;
+                obj = obj + '{"Type":' + ruleTypeId + ',"Selector":"' + rulesDivs[i].children[1].children[0].value + '","Value":"' + 
+                    rulesDivs[i].children[2].children[0].value + '"}';
+                if (i != rulesDivs.length - 1)
+                    obj = obj + ',';              
+            }
             obj = obj + '],"Name":"';
             obj = obj + $('#task_name').val() + '","Description":"';
             obj = obj + $('#task_description').val() + '"}';
-            //alert(obj);
-            //{
-            //    "Rule": [],
-            //    "Name": "taskbla",
-            //    "Description": "bla"
-            //}
 
-            //if ($('#taskList').attr('name') == 'empty')
-            //    alert('ok');
-            //else
-            //    alert($('#taskList').attr('name'));
+            alert(obj);
+            
+            //{
+            //    "Rule": [
+            //      {
+            //          "Type": 1,
+            //          "Selector": "//h1",
+            //          "Value": ""
+            //      },
+            //      {
+            //          "Type": 1,
+            //          "Selector": "//h2",
+            //          "Value": ""
+            //      }
+            //    ],
+            //    "Name": "task1",
+            //    "Description": "Додайте тег <h1> та <h2> на сторінку"
+            //}            
 
             jQuery.ajax({
                 url: uri,
