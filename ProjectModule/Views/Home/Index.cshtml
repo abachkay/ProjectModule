@@ -117,8 +117,8 @@
                             }
                             else
                             {
-                                <button type="button" class="panel-body btn btn-info btn-lg pull-right disabled" style="width:100%;border-radius:0;" onclick="renderReslut()">
-                                    Далі <span class="glyphicon glyphicon-circle-arrow-right"></span>
+                                <button type="button" class="panel-body btn btn-info btn-lg pull-right" style="width:100%;border-radius:0;" onclick="location.href='@Url.Action("NextTask", "Home", new { taskId = ViewBag.CurrentTask.Id })'">
+                                    Пропуск <span class="glyphicon glyphicon-circle-arrow-right"></span>
                                 </button>
                             }
                         </div>
