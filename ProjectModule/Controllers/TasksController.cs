@@ -78,15 +78,24 @@ namespace ProjectModule.Controllers
             {
                 return BadRequest(ModelState);
             }
-            var old = _db.Task.Find(task.Id);
-            if (old == null)
+            var oldTask = _db.Task.Find(task.Id);
+            if (oldTask == null)
             {
                 var newTask = (_db.Task.Add(task));
                 _db.SaveChanges();
                 return Json(newTask);
             }
 
-            _db.Entry(old).CurrentValues.SetValues(task);
+            foreach (var rule in oldTask.Rule.ToList())
+            {
+                _db.Rule.Remove(rule);
+            }
+            foreach (var newRule in task.Rule)
+            {
+                oldTask.Rule.Add(newRule);
+            }
+            oldTask.Description = task.Description;
+            oldTask.Name = task.Name;
 
             _db.SaveChanges();
 
