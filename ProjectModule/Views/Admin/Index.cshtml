@@ -13,16 +13,16 @@
             <div class="list-group" title="TASKS" id="taskList"  name="empty">
                 <a href="#" class="list-group-item disabled"><b>Tasks</b></a>
             </div>
-            <button type="button" class="btn btn-success btn-circle center-block add_btn" onclick="addTask()" name="create-task-button">
+            <button type="button" class="btn btn-success btn-circle center-block add_btn" style="border-radius:0" onclick="addTask()" name="create-task-button">
                 <span class="glyphicon glyphicon-plus"></span>
             </button>
         </div>
         <div class="col-md-9">   
             <div class="row">
                 <div class="col-md-12">
-                    <div class="btn-group">
-                        <button type="submit" name="save-task-button" class="btn btn-success" onclick="putTask()"><span class="glyphicon glyphicon-save"></span>Зберегти</button>
-                        <button type="button" name="delete-task-button" class="btn btn-danger" onclick="deleteTask();">Видалити<span class="glyphicon glyphicon-remove"></span></button>
+                    <div class="btn-group pull-right" style="border-radius:0">
+                        <button type="submit" name="save-task-button" class="btn btn-success" style="border-radius:0" onclick="putTask()"><span class="glyphicon glyphicon-save"></span>Зберегти</button>
+                        <button type="button" name="delete-task-button" class="btn btn-danger" style="border-radius:0" onclick="deleteTask();">Видалити<span class="glyphicon glyphicon-remove"></span></button>
                     </div>
                 </div>
             </div>        
@@ -53,7 +53,7 @@
                         <textarea style="resize:none" class="form-control" rows="1" placeholder="Value"></textarea>
                     </div>
                     <div class="col-md-1">
-                        <button type="button" name="add-parameter-button" class="btn btn-danger pull-right">
+                        <button type="button" name="add-parameter-button" class="btn btn-danger pull-right" style="border-radius:0">
                             <span class="glyphicon glyphicon-minus"></span>
                         </button>
                     </div>
@@ -61,7 +61,7 @@
             </div>
             <div class="row" style="margin-top:15px">
                 <div class="col-md-12 center-block">
-                    <button type="button" name="add-parameter-button" class="btn btn-success center-block" onclick="addRule()">
+                    <button type="button" name="add-parameter-button" class="btn btn-success center-block" style="border-radius:0" onclick="addRule()">
                         <span class="glyphicon glyphicon-plus"></span>
                     </button>
                 </div>
@@ -98,7 +98,7 @@
                     .append($('<textarea></textarea>').addClass("form-control").attr("style", "resize:none").attr("rows", "1").attr("placeholder", "Value")
                         .val(rule.Value)))
                 .append($('<div></div>').addClass("col-md-1")
-                    .append($('<button></button>').attr("type", "button").addClass("btn btn-danger pull-right").attr("name", "add-parameter-button")
+                    .append($('<button></button>').attr("type", "button").addClass("btn btn-danger pull-right").attr("name", "add-parameter-button").attr("style","border-radius:0")
                         .click(function() { $(this).parent().parent().remove() })
                         .append($('<span></span>').addClass("glyphicon glyphicon-minus"))));
 
@@ -116,7 +116,7 @@
             $('#taskList').attr('name', task.Id);
             $.each(task.Rule, function(key, rule) {
                 $('#rule_list').append(createRule(rule));
-            });
+            });           
         }
 
         function loadTask(id) {
@@ -134,12 +134,14 @@
                         $('<a></a>').attr("href", "#").attr("class", "list-group-item")
                             .html(item.Name)
                             .on('click', function() {
-                                displayTask(item);
+                                displayTask(item);                            
+                                changeSecection(key);
                             })
                             .appendTo($('#taskList'));
                     });
                     if (data.length > 0)
                         displayTask(data[0]);
+                    changeSecection(0);
                 });
         }
 
@@ -156,11 +158,13 @@
         }
 
         function addTask() {
+            if (document.getElementById('taskList').lastChild.innerHTML != 'Нове завдання')
             $('<a></a>').attr("href", "#").attr("class", "list-group-item")
                 .html("Нове завдання")
                 .on('click', function() {
                     clearFields();
                     $('#taskList').attr('name', 'empty');
+                    changeSecection(document.getElementById('taskList').children.length - 1);
                 })
                 .appendTo($('#taskList'));
         }
@@ -220,6 +224,19 @@
                     displayTask(data);
                 }
             });
+        }
+
+        function changeSecection(index)
+        {           
+            //alert($('#taskList:nth-child(' + index + ')').val());
+            var tasks = document.getElementById('taskList').children;            
+            for (var i = 0; i < tasks.length; i++)
+            {
+                if (i == index)
+                    tasks[i].className = "list-group-item active";
+                else
+                    tasks[i].className = "list-group-item";
+            }
         }
     </script>
 }
