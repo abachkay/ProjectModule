@@ -189,17 +189,11 @@
             var idToModify = $('#taskList').attr('name');                
             var obj = '{"Rule":[';           
             var rulesDivs = document.getElementById('rule_list').children;
-            for (var i = 0; i < rulesDivs.length; i++) {                
-                var ruleType = rulesDivs[i].children[0].children[0].children[0].children[0].innerText;
-                if (ruleType == "XPath query")
-                    var ruleTypeId = 0;
-                if (ruleType == "XPath element style")
-                    var ruleTypeId = 1;
-                if (ruleType == "XPath attributes")
-                    var ruleTypeId = 2;
+            for (var i = 0; i < rulesDivs.length; i++) {
+                var ruleTypeId = $(rulesDivs[i]).find('.selectpicker').selectpicker('val');
                 obj = obj + '{"Type":' + ruleTypeId + ',"Selector":"' + rulesDivs[i].children[1].children[0].value + '","Value":"' + 
                     rulesDivs[i].children[2].children[0].value + '"}';
-                if (i != rulesDivs.length - 1)
+                if (i !== rulesDivs.length - 1)
                     obj = obj + ',';              
             }
             if (idToModify == 'empty') {
@@ -219,8 +213,9 @@
                 type: "PUT",
                 data: obj,
                 contentType: "application/json",
-                success: function (data) {                    
+                success: function (data) {
                     loadTaskList();
+                    displayTask(data);
                 }
             });
         }
