@@ -18,7 +18,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="btn-group">
-                        <button type="submit" name="save-task-button" class="btn btn-success"><span class="glyphicon glyphicon-save"></span> Save</button>
+                        <button type="submit" name="save-task-button" class="btn btn-success" onclick="putTask()"><span class="glyphicon glyphicon-save"></span> Save</button>
                         <button type="button" name="delete-task-button" class="btn btn-danger" onclick="deleteTask();">Delete <span class="glyphicon glyphicon-remove"></span></button>
                     </div>
                 </div>
@@ -130,8 +130,9 @@
                            .on('click', function () {
                                displayTask(item.Id);
                            })
-                           .appendTo($('#taskList'));
+                           .appendTo($('#taskList'));                      
                    });
+                   displayTask(data[0].Id);
                });
         }
         $(document).ready(function() {            
@@ -179,6 +180,35 @@
                         alert("error");
                     })
                 });
+        }
+
+        function putTask() {
+            //var obj = '{"Rule": [{"Type": 1,"Selector": "//h1","Value": ""},{"Type": 1,"Selector": "//h2","Value": ""}],"Name": "task1","Description": "Додайте тег <h1> та <h2> на сторінку"}';            
+            var obj = '{"Rule":[';
+            obj = obj + '],"Name":"';
+            obj = obj + $('#task_name').val() + '","Description":"';
+            obj = obj + $('#task_description').val() + '"}';
+            alert(obj);
+            //{
+            //    "Rule": [],
+            //    "Name": "taskbla",
+            //    "Description": "bla"
+            //}
+
+            //if ($('#taskList').attr('name') == 'empty')
+            //    alert('ok');
+            //else
+            //    alert($('#taskList').attr('name'));
+
+            jQuery.ajax({
+                url: uri,
+                type: "PUT",
+                data: obj,
+                contentType: "application/json",
+                success: function (data) {
+                    alert('ok');
+                }
+            });
         }
     </script>
 }
